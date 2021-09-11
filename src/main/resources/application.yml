@@ -1,0 +1,15 @@
+spring:
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+  datasource: #DB는 스프링에서 간단히 쓸때 많이 쓰는 H2. 드라이버랑 주소 유저네임 저게 디폴트고, 위에는 콘솔 옵션임.
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true # 쿼리를 보기 좋게 출력한다
+    show-sql: true # 작동 중 생기는 쿼리를 모두 보여준다. 실제 작동에서는 꺼야됨
+    generate-ddl: true # 내가 만든 엔티티를 바탕으로 ddl을 만들어준다. 실제 서비스에서는 큰일남
