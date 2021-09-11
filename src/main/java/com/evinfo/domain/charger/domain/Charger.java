@@ -27,10 +27,10 @@ public class Charger {
     private Long id;
 
     @NotBlank
-    private String statName;
+    private String stationName;
 
     @NotBlank
-    private String statId;
+    private String stationId;
 
     @Enumerated(EnumType.STRING)
     @NotNull

@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 public class ChargerResponseDto {
     private Long id;
-    private String statName;
-    private String statId;
+    private String stationName;
+    private String stationId;
     private ChargerType chargerType;
     private String address;
     private String location;
@@ -21,8 +21,8 @@ public class ChargerResponseDto {
 
     public ChargerResponseDto(final Charger charger) {
         this.id = charger.getId();
-        this.statName = charger.getStatName();
-        this.statId = charger.getStatId();
+        this.stationName = charger.getStationName();
+        this.stationId = charger.getStationId();
         this.chargerType = charger.getChargerType();
         this.address = charger.getAddress();
         this.location = charger.getLocation();
