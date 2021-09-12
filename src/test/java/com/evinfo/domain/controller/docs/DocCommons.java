@@ -1,5 +1,4 @@
-package com.umjjal.domain.post.web.docs;
-
+package com.evinfo.domain.controller.docs;
 
 import lombok.Builder;
 import lombok.Getter;

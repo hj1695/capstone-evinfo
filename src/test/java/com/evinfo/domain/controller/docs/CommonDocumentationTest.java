@@ -1,12 +1,12 @@
-package com.umjjal.domain.post.web.docs;
+package com.evinfo.domain.controller.docs;
 
+import com.evinfo.global.error.ErrorCode;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.umjjal.global.error.ErrorCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
@@ -33,7 +33,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+//@ContextConfiguration(classes = TestConfig.class)
+//@SpringBootTest
+@WebMvcTest(controllers = {EnumViewController.class})
 class CommonDocumentationTest extends Documentation {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

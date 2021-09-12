@@ -1,4 +1,4 @@
-package com.umjjal.domain.post.web.docs;
+package com.evinfo.domain.controller.docs;
 
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.operation.Operation;

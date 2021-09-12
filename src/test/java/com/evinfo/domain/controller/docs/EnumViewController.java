@@ -1,7 +1,7 @@
-package com.umjjal.domain.post.web.docs;
+package com.evinfo.domain.controller.docs;
 
-import com.umjjal.global.error.ErrorCode;
-import com.umjjal.global.error.ErrorResponse;
+import com.evinfo.global.error.ErrorCode;
+import com.evinfo.global.error.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

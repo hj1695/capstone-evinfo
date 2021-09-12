@@ -1,10 +1,10 @@
 package com.evinfo.domain.controller;
 
+import com.evinfo.domain.charger.controller.ChargerController;
 import com.evinfo.domain.charger.domain.Charger;
 import com.evinfo.domain.charger.service.ChargerClient;
 import com.evinfo.domain.controller.docs.Documentation;
 import com.evinfo.utils.ChargerGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,10 +30,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
-public class ChargerControllerTest extends Documentation {
+@WebMvcTest(controllers = {ChargerController.class})
+class ChargerControllerTest extends Documentation {
     private static final String API = "/api";
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @MockBean
     private ChargerClient chargerClient;
