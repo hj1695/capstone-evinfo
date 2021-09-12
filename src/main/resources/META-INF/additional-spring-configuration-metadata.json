@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "rest.evinfo.url",
+      "type": "java.lang.String",
+      "description": "Description for rest.evinfo.url."
+  }
+] }
