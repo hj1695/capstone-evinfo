@@ -1,0 +1,62 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-http-request-title: Example Request
+:operation-http-response-title: Example Response
+[[introduction]]
+== 소개
+
+서강대학교 캡스톤디자인 II
+
+EvInfo 서비스 API 문서입니다.
+
+아래의 사항에 맞게 요청 부탁드립니다.
+
+[[common]]
+== 공통 사항
+
+API에 관계없이 아래 사항을 지켜주셔야 합니다.
+
+* 현재 인프라 문제로 링크 미기재
+
+=== Domain
+
+|===
+| 환경 | Domain
+
+| 개발서버
+| `http://docs.api.com:8080`
+
+| 운영서버
+| `https://docs.api.com`
+|===
+
+=== Common Response
+
+==== Error Response
+
+include::{snippets}/common/response-fields.adoc[]
+
+=== Enum Types
+
+include::{snippets}/common/custom-response-fields-errorCodes.adoc[]
+include::{snippets}/common/custom-response-fields-chargerTypes.adoc[]
+include::{snippets}/common/custom-response-fields-chargerStats.adoc[]
+
+[[resources]]
+= API
+
+[[resources-chargers]]
+== Chargers
+
+[[resources-posts-gets]]
+=== 게시물 전체 조회
+
+operation::chargers/gets[snippets='http-request,http-response,response-fields']
+
