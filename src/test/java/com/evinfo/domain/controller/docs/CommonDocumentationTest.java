@@ -69,9 +69,9 @@ class CommonDocumentationTest extends Documentation {
                 ));
     }
 
-    @DisplayName("Enum 공통 클래스의 목록을 문서화한다.")
+    @DisplayName("공통 Enum 클래스의 목록을 문서화한다.")
     @Test
-    void commonsEnumTest() throws Exception {
+    void commonEnumTest() throws Exception {
         //when
         ResultActions result = this.mockMvc.perform(
                 get("/docs")
@@ -87,6 +87,14 @@ class CommonDocumentationTest extends Documentation {
                         customResponseFields("custom-response", beneathPath("errorCodes").withSubsectionId("errorCodes"),
                                 attributes(key("title").value("에러코드")),
                                 enumConvertFieldDescriptor(docs.getErrorCodes())
+                        ),
+                        customResponseFields("custom-response", beneathPath("chargerTypes").withSubsectionId("chargerTypes"),
+                                attributes(key("title").value("충전기 타입")),
+                                enumConvertFieldDescriptor(docs.getChargerTypes())
+                        ),
+                        customResponseFields("custom-response", beneathPath("chargerStats").withSubsectionId("chargerStats"),
+                                attributes(key("title").value("충전기 상태")),
+                                enumConvertFieldDescriptor(docs.getChargerStats())
                         )
                 ));
     }

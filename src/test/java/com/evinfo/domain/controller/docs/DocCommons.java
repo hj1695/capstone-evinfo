@@ -10,9 +10,14 @@ import java.util.Map;
 @NoArgsConstructor
 public class DocCommons {
     Map<String, String> errorCodes;
+    Map<String, String> chargerTypes;
+    Map<String, String> chargerStats;
 
     @Builder(builderClassName = "TestBuilder", builderMethodName = "testBuilder")
-    public DocCommons(Map<String, String> errorCodes) {
+
+    public DocCommons(Map<String, String> errorCodes, Map<String, String> chargerTypes, Map<String, String> chargerStats) {
         this.errorCodes = errorCodes;
+        this.chargerTypes = chargerTypes;
+        this.chargerStats = chargerStats;
     }
 }

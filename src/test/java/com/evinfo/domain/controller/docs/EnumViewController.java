@@ -1,5 +1,7 @@
 package com.evinfo.domain.controller.docs;
 
+import com.evinfo.domain.charger.domain.ChargerStat;
+import com.evinfo.domain.charger.domain.ChargerType;
 import com.evinfo.global.error.ErrorCode;
 import com.evinfo.global.error.ErrorResponse;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +17,14 @@ public class EnumViewController {
     @GetMapping("/docs")
     public ResponseEntity<DocCommons> findAll() {
         Map<String, String> errorCodes = getErrorCodeDocs();
-        // TODO: 2021/07/08 추후 공통 Enum이 더 생기게 되면, 여기에 추가해주고 DocCommons에도 추가해준다.
+        Map<String, String> chargerTypes = getChargerTypes();
+        Map<String, String> chargerStats = getChargerStats();
 
         return ResponseEntity.ok()
                 .body(DocCommons.testBuilder()
                         .errorCodes(errorCodes)
+                        .chargerTypes(chargerTypes)
+                        .chargerStats(chargerStats)
                         .build());
     }
 
@@ -33,6 +38,22 @@ public class EnumViewController {
         Map<String, String> result = new LinkedHashMap<>();
         for (ErrorCode errorCode : ErrorCode.values()) {
             result.put(errorCode.getCode(), errorCode.name());
+        }
+        return result;
+    }
+
+    private Map<String, String> getChargerTypes() {
+        Map<String, String> result = new LinkedHashMap<>();
+        for (ChargerType chargerType : ChargerType.values()) {
+            result.put(chargerType.getKey().toString(), chargerType.getName());
+        }
+        return result;
+    }
+
+    private Map<String, String> getChargerStats() {
+        Map<String, String> result = new LinkedHashMap<>();
+        for (ChargerStat chargerStat : ChargerStat.values()) {
+            result.put(chargerStat.getKey().toString(), chargerStat.getName());
         }
         return result;
     }
