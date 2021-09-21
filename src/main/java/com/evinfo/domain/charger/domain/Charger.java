@@ -32,7 +32,7 @@ public class Charger {
 
     private String location;
 
-    @NotBlank
+    @NotNull
     private String useTime;
 
     @NotNull
