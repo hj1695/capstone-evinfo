@@ -12,10 +12,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 
 import javax.naming.AuthenticationException;
+import javax.validation.UnexpectedTypeException;
 import java.nio.file.AccessDeniedException;
 
 /**
@@ -59,16 +59,17 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * handleMethodArgumentTypeMismatchException 메서드는 enum type이 일치하지 않아 binding을 못할 경우 호출된다.
+     * handleUnexpectedTypeException 메서드는 enum type이 일치하지 않아 binding을 못할 경우 호출된다.
      * 주로 @RequestParam enum으로 binding 못했을 경우 발생한다.
      *
      * @param e 전달받은 MethodArgumentTypeMismatchException 예외 객체이다.
      * @return ErrorResponse 객체를 ResponseEntity에 담아 반환한다.
+     * @see UnexpectedTypeException
      */
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(
-            MethodArgumentTypeMismatchException e) {
-        log.error("handleMethodArgumentTypeMismatchException", e);
+    @ExceptionHandler(UnexpectedTypeException.class)
+    protected ResponseEntity<ErrorResponse> handleUnexpectedTypeException(
+            UnexpectedTypeException e) {
+        log.error("handleUnexpectedTypeException", e);
         final ErrorResponse response = ErrorResponse.of(ErrorCode.INVALID_TYPE_VALUE);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

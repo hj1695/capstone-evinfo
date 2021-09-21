@@ -2301,6 +2301,10 @@
             <td class="tableblock halign-left valign-top"><p class="tableblock"><code>7</code></p></td>
             <td class="tableblock halign-left valign-top"><p class="tableblock">AC3상</p></td>
           </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>9</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">알 수 없음</p></td>
+          </tr>
           </tbody>
         </table>
         <div class="paragraph">
@@ -2358,7 +2362,7 @@
             Request</a></h4>
           <div class="listingblock">
             <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/chargers HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/chargers?latitude=1.1&amp;longitude=2.2&amp;size=10 HTTP/1.1
 Accept: application/json
 Host: evinfo.com</code></pre>
             </div>
@@ -2400,6 +2404,38 @@ Content-Length: 696
 } ]</code></pre>
             </div>
           </div>
+        </div>
+        <div class="sect3">
+          <h4 id="resources-posts-gets_request_parameters"><a class="link"
+                                                              href="#resources-posts-gets_request_parameters">Request
+            parameters</a></h4>
+          <table class="tableblock frame-all grid-all spread">
+            <colgroup>
+              <col style="width: 50%;">
+              <col style="width: 50%;">
+            </colgroup>
+            <thead>
+            <tr>
+              <th class="tableblock halign-left valign-top">Parameter</th>
+              <th class="tableblock halign-left valign-top">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>latitude</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 위도 값</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>longitude</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 경도 값</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">반환받고자 하는 사용자 주변 충전소 개수. 최대 1000개로
+                제한</p></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
         <div class="sect3">
           <h4 id="resources-posts-gets_response_fields"><a class="link" href="#resources-posts-gets_response_fields">Response
@@ -2487,7 +2523,7 @@ Content-Length: 696
 </div>
 <div id="footer">
   <div id="footer-text">
-    Last updated 2021-09-13 10:08:37 KST
+    Last updated 2021-09-21 14:36:29 KST
   </div>
 </div>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
