@@ -30,6 +30,7 @@ public class Charger {
     @NotBlank
     private String address;
 
+    @NotNull
     private String location;
 
     @NotNull

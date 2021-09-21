@@ -7,18 +7,18 @@ import lombok.Getter;
 
 @Getter
 public class ChargerResponseDto {
-    private Long id;
-    private String stationName;
-    private String stationId;
-    private ChargerType chargerType;
-    private String address;
-    private String location;
-    private String useTime;
-    private Double lat;
-    private Double lng;
-    private String callNumber;
-    private ChargerStat chargerStat;
-    private Double distance;
+    private final Long id;
+    private final String stationName;
+    private final String stationId;
+    private final ChargerType chargerType;
+    private final String address;
+    private final String location;
+    private final String useTime;
+    private final Double lat;
+    private final Double lng;
+    private final String callNumber;
+    private final ChargerStat chargerStat;
+    private final Double distance;
 
     public ChargerResponseDto(final Charger charger, final Double distance) {
         this.id = charger.getId();
