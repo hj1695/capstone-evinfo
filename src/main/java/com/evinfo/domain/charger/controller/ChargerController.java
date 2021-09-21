@@ -20,7 +20,7 @@ public class ChargerController {
 
     @GetMapping("/chargers")
     public ResponseEntity<List<ChargerResponseDto>> getChargers() {
-        chargerClient.fetchChargers();
+        chargerClient.fetchChargers(); // TODO: 2021/09/21 이부분은 추후 batch 적용시 삭제할 예정
         final List<ChargerResponseDto> responses = chargerService.getChargers();
 
         return ResponseEntity.ok()
