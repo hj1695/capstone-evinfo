@@ -18,8 +18,9 @@ public class ChargerResponseDto {
     private Double lng;
     private String callNumber;
     private ChargerStat chargerStat;
+    private Double distance;
 
-    public ChargerResponseDto(final Charger charger) {
+    public ChargerResponseDto(final Charger charger, final Double distance) {
         this.id = charger.getId();
         this.stationName = charger.getStationName();
         this.stationId = charger.getStationId();
@@ -31,5 +32,6 @@ public class ChargerResponseDto {
         this.lng = charger.getLng();
         this.callNumber = charger.getCallNumber();
         this.chargerStat = charger.getChargerStat();
+        this.distance = distance;
     }
 }

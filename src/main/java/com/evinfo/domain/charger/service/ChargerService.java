@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -20,25 +22,21 @@ public class ChargerService {
 
     @Transactional(readOnly = true)
     public List<ChargerResponseDto> getChargers(ChargerRequestDto request) {
-        List<Charger> chargers = chargerRepository.findAll();
-        Map<Double, Charger> distanceSortedMap = getDistanceSortedMap(request, chargers);
+        Map<Double, ChargerResponseDto> distanceSortedMap = chargerRepository.findAll()
+                .stream()
+                .map(charger -> {
+                    Double distance = calculateDistance(charger, request);
+                    return new ChargerResponseDto(charger, distance);
+                })
+                .collect(Collectors.toMap(ChargerResponseDto::getDistance, Function.identity(), (o1, o2) -> o1, TreeMap::new));
         List<ChargerResponseDto> responses = new ArrayList<>();
 
         for (var entry : distanceSortedMap.entrySet()) {
-            responses.add(new ChargerResponseDto(entry.getValue()));
+            responses.add(entry.getValue());
             if (responses.size() >= request.getSize()) break;
         }
 
         return responses;
-    }
-
-    private Map<Double, Charger> getDistanceSortedMap(ChargerRequestDto request, List<Charger> chargers) {
-        Map<Double, Charger> distanceMap = new TreeMap<>();
-        for (var charger : chargers) {
-            Double distance = calculateDistance(charger, request);
-            distanceMap.put(distance, charger);
-        }
-        return distanceMap;
     }
 
     private Double calculateDistance(Charger charger, ChargerRequestDto request) {
