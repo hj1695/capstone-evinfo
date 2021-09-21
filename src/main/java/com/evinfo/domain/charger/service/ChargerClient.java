@@ -2,7 +2,9 @@ package com.evinfo.domain.charger.service;
 
 import com.evinfo.domain.charger.domain.Charger;
 import com.evinfo.domain.charger.dto.client.ChargerClientResponseDto;
+import com.evinfo.domain.charger.dto.client.EvinfoBodyResponseDto;
 import com.evinfo.domain.charger.dto.client.EvinfoResponseDto;
+import com.evinfo.domain.charger.repository.ChargerRepository;
 import com.evinfo.global.common.RestProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -10,10 +12,14 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,15 +29,22 @@ import java.util.stream.Collectors;
 public class ChargerClient {
     private final WebClient webClient;
     private final RestProperties restProperties;
+    private final ChargerRepository chargerRepository;
 
-    public ChargerClient(WebClient.Builder webClientBuilder, final RestProperties restProperties) {
+    public ChargerClient(WebClient.Builder webClientBuilder, final RestProperties restProperties, final ChargerRepository chargerRepository) {
         var factory = new DefaultUriBuilderFactory(restProperties.getEvinfoUrl());
         factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
+        this.chargerRepository = chargerRepository;
+        var exchangeStrategies = ExchangeStrategies.builder()
+                .codecs(configurer -> configurer.defaultCodecs()
+                        .maxInMemorySize(10 * 1024 * 1024)) // TODO: 2021/09/20 이거 yml에 직접 넣쟈?
+                .build();
 
         this.restProperties = restProperties;
         this.webClient = webClientBuilder
                 .uriBuilderFactory(factory)
                 .baseUrl(restProperties.getEvinfoUrl())
+                .exchangeStrategies(exchangeStrategies)
                 .filter(logRequest())
                 .filter(logResponse())
                 .build();
@@ -66,24 +79,34 @@ public class ChargerClient {
         });
     }
 
-    public List<Charger> getChargers() {
-        EvinfoResponseDto response = getEvinfoMono().blockOptional()
-                .orElseThrow(IllegalArgumentException::new); // TODO: 2021/09/10 예외 커스텀하기
-
-        return response.getBody()
-                .getItems()
+    public void fetchChargers() {
+        List<Charger> chargers = getChargers()
                 .stream()
                 .map(ChargerClientResponseDto::getCharger)
                 .collect(Collectors.toList());
+
+        chargerRepository.deleteAll();
+        chargerRepository.saveAll(chargers);
     }
 
-    private Mono<EvinfoResponseDto> getEvinfoMono() {
+    public List<ChargerClientResponseDto> getChargers() {
+        return Flux.interval(Duration.ofMillis(100))
+                .take(restProperties.getEvinfoIterator())
+                .flatMap(i -> getEvinfoMono(i + 1))
+                .toStream()
+                .map(EvinfoResponseDto::getBody)
+                .map(EvinfoBodyResponseDto::getItems)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
+    private Mono<EvinfoResponseDto> getEvinfoMono(long page) {
         return this.webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("serviceKey", restProperties.getEvinfoKey())
-                        .queryParam("numOfRows", "100")
-                        .queryParam("pageNo", "1")
+                        .queryParam("numOfRows", restProperties.getEvinfoChunk())
+                        .queryParam("pageNo", page)
                         .build())
                 .accept(MediaType.APPLICATION_XML)
                 .retrieve()
