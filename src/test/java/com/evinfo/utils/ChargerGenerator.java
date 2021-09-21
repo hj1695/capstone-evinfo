@@ -17,8 +17,10 @@ public class ChargerGenerator {
     private static final String 충전기_주소 = "주소 예시";
     private static final String 충전기_세부_주소 = "주소 세부설명 예시";
     private static final String 충전기_사용시간 = "사용시간 예시";
-    private static final Double 충전기_위도 = 123.45;
-    private static final Double 충전기_경도 = 456.78;
+    private static final Double 충전기_위도_1 = 1.0;
+    private static final Double 충전기_위도_2 = 2.0;
+    private static final Double 충전기_경도_1 = 10.0;
+    private static final Double 충전기_경도_2 = 20.0;
     private static final String 충전기_전화번호 = "010-1234-5678";
     private static final ChargerStat 충전기_상태 = ChargerStat.CHECKING;
 
@@ -33,8 +35,8 @@ public class ChargerGenerator {
                 .address(충전기_주소)
                 .location(충전기_세부_주소)
                 .useTime(충전기_사용시간)
-                .lat(충전기_위도)
-                .lng(충전기_경도)
+                .lat(충전기_위도_1)
+                .lng(충전기_경도_1)
                 .callNumber(충전기_전화번호)
                 .chargerStat(충전기_상태)
                 .build();
@@ -46,8 +48,8 @@ public class ChargerGenerator {
                 .address(충전기_주소)
                 .location(충전기_세부_주소)
                 .useTime(충전기_사용시간)
-                .lat(충전기_위도)
-                .lng(충전기_경도)
+                .lat(충전기_위도_2)
+                .lng(충전기_경도_2)
                 .callNumber(충전기_전화번호)
                 .chargerStat(충전기_상태)
                 .build();

@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
@@ -64,10 +65,10 @@ class ChargerControllerTest extends Documentation {
                 .map(ChargerResponseDto::new)
                 .collect(Collectors.toList());
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.put("latitude", Collections.singletonList("1.1"));
-        params.put("longitude", Collections.singletonList("2.2"));
+        params.put("latitude", Collections.singletonList("11.11"));
+        params.put("longitude", Collections.singletonList("22.22"));
         params.put("size", Collections.singletonList("10"));
-        when(chargerService.getChargers()).thenReturn(chargerResponses);
+        when(chargerService.getChargers(any())).thenReturn(chargerResponses);
 
         this.mockMvc.perform(get(API + "/chargers")
                 .params(params)
