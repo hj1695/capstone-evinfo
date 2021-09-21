@@ -1,6 +1,5 @@
 package com.evinfo.domain.charger.domain;
 
-import com.evinfo.domain.charger.exception.ChargerTypeNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +14,8 @@ public enum ChargerType {
     TYPE04(4L, "DC 콤보"),
     TYPE05(5L, "DC차 데모 + DC 콤보"),
     TYPE06(6L, "DC차 데모 + AC3상 + DC 콤보"),
-    TYPE07(7L, "AC3상");
+    TYPE07(7L, "AC3상"),
+    UNKNOWN(9L, "알 수 없음");
 
     private final Long key;
     private final String name;
@@ -24,6 +24,6 @@ public enum ChargerType {
         return Arrays.stream(ChargerType.values())
                 .filter(chargerType -> chargerType.getKey().equals(key))
                 .findFirst()
-                .orElseThrow(() -> new ChargerTypeNotFoundException(key));
+                .orElse(UNKNOWN);
     }
 }

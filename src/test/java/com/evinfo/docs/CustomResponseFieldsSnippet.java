@@ -1,4 +1,4 @@
-package com.evinfo.domain.controller.docs;
+package com.evinfo.docs;
 
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.operation.Operation;

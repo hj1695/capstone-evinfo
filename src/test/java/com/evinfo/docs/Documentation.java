@@ -1,4 +1,4 @@
-package com.evinfo.domain.controller.docs;
+package com.evinfo.docs;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;

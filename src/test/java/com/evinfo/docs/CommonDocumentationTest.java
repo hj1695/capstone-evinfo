@@ -1,4 +1,4 @@
-package com.evinfo.domain.controller.docs;
+package com.evinfo.docs;
 
 import com.evinfo.global.error.ErrorCode;
 import com.fasterxml.jackson.core.type.TypeReference;

@@ -1,6 +1,5 @@
 package com.evinfo.domain.charger.domain;
 
-import com.evinfo.domain.charger.exception.ChargerStatNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +22,6 @@ public enum ChargerStat {
         return Arrays.stream(ChargerStat.values())
                 .filter(chargerStat -> chargerStat.getKey().equals(key))
                 .findFirst()
-                .orElseThrow(() -> new ChargerStatNotFoundException(key));
+                .orElse(UNKNOWN);
     }
 }

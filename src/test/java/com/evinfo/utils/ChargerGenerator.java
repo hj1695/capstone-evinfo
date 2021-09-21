@@ -3,6 +3,7 @@ package com.evinfo.utils;
 import com.evinfo.domain.charger.domain.Charger;
 import com.evinfo.domain.charger.domain.ChargerStat;
 import com.evinfo.domain.charger.domain.ChargerType;
+import com.evinfo.domain.charger.dto.client.ChargerClientResponseDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,5 +59,33 @@ public class ChargerGenerator {
 
     public static List<Charger> getChargers() {
         return Arrays.asList(charger1, charger2);
+    }
+
+    public static List<ChargerClientResponseDto> getClientChargers() {
+        return Arrays.asList(
+                ChargerClientResponseDto.builder()
+                        .statNm(charger1.getStationName())
+                        .statId(charger1.getStationId())
+                        .chgerType(charger1.getChargerType().getKey())
+                        .addr(charger1.getAddress())
+                        .location(charger1.getLocation())
+                        .useTime(charger1.getUseTime())
+                        .lat(charger1.getLat())
+                        .lng(charger1.getLng())
+                        .busiCall(charger1.getCallNumber())
+                        .stat(charger1.getChargerStat().getKey())
+                        .build(),
+                ChargerClientResponseDto.builder()
+                        .statNm(charger2.getStationName())
+                        .statId(charger2.getStationId())
+                        .chgerType(charger2.getChargerType().getKey())
+                        .addr(charger2.getAddress())
+                        .location(charger2.getLocation())
+                        .useTime(charger2.getUseTime())
+                        .lat(charger2.getLat())
+                        .lng(charger2.getLng())
+                        .busiCall(charger2.getCallNumber())
+                        .stat(charger2.getChargerStat().getKey())
+                        .build());
     }
 }

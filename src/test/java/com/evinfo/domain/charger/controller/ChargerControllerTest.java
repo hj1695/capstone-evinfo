@@ -1,9 +1,9 @@
-package com.evinfo.domain.controller;
+package com.evinfo.domain.charger.controller;
 
-import com.evinfo.domain.charger.controller.ChargerController;
-import com.evinfo.domain.charger.domain.Charger;
+import com.evinfo.docs.Documentation;
+import com.evinfo.domain.charger.dto.ChargerResponseDto;
 import com.evinfo.domain.charger.service.ChargerClient;
-import com.evinfo.domain.controller.docs.Documentation;
+import com.evinfo.domain.charger.service.ChargerService;
 import com.evinfo.utils.ChargerGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
@@ -37,6 +38,9 @@ class ChargerControllerTest extends Documentation {
     @MockBean
     private ChargerClient chargerClient;
 
+    @MockBean
+    private ChargerService chargerService;
+
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -50,8 +54,11 @@ class ChargerControllerTest extends Documentation {
     @DisplayName("'/chargers'로 GET 요청 시, 충전기의 목록을 반환한다.")
     @Test
     void getChargersTest() throws Exception {
-        List<Charger> chargerResponses = ChargerGenerator.getChargers();
-        when(chargerClient.getChargers()).thenReturn(chargerResponses);
+        List<ChargerResponseDto> chargerResponses = ChargerGenerator.getChargers()
+                .stream()
+                .map(ChargerResponseDto::new)
+                .collect(Collectors.toList());
+        when(chargerService.getChargers()).thenReturn(chargerResponses);
 
         this.mockMvc.perform(get(API + "/chargers")
                 .accept(MediaType.APPLICATION_JSON_VALUE))
