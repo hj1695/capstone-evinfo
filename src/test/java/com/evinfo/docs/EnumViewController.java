@@ -45,7 +45,7 @@ public class EnumViewController {
     private Map<String, String> getChargerTypes() {
         Map<String, String> result = new LinkedHashMap<>();
         for (ChargerType chargerType : ChargerType.values()) {
-            result.put(chargerType.getKey().toString(), chargerType.getName());
+            result.put(chargerType.toString(), chargerType.getName());
         }
         return result;
     }
@@ -53,7 +53,7 @@ public class EnumViewController {
     private Map<String, String> getChargerStats() {
         Map<String, String> result = new LinkedHashMap<>();
         for (ChargerStat chargerStat : ChargerStat.values()) {
-            result.put(chargerStat.getKey().toString(), chargerStat.getName());
+            result.put(chargerStat.toString(), chargerStat.getName());
         }
         return result;
     }
