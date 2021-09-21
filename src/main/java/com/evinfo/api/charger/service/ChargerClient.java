@@ -1,10 +1,10 @@
-package com.evinfo.domain.charger.service;
+package com.evinfo.api.charger.service;
 
-import com.evinfo.domain.charger.domain.Charger;
-import com.evinfo.domain.charger.dto.client.ChargerClientResponseDto;
-import com.evinfo.domain.charger.dto.client.EvinfoBodyResponseDto;
-import com.evinfo.domain.charger.dto.client.EvinfoResponseDto;
-import com.evinfo.domain.charger.repository.ChargerRepository;
+import com.evinfo.api.charger.dto.client.ChargerClientResponseDto;
+import com.evinfo.api.charger.dto.client.EvinfoBodyResponseDto;
+import com.evinfo.api.charger.dto.client.EvinfoResponseDto;
+import com.evinfo.api.charger.repository.ChargerRepository;
+import com.evinfo.domain.charger.Charger;
 import com.evinfo.global.common.RestProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

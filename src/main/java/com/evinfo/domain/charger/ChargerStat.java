@@ -1,4 +1,4 @@
-package com.evinfo.domain.charger.domain;
+package com.evinfo.domain.charger;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

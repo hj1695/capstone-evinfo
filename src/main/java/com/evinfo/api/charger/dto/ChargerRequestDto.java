@@ -1,4 +1,4 @@
-package com.evinfo.domain.charger.dto;
+package com.evinfo.api.charger.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

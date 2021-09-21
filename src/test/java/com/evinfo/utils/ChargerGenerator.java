@@ -1,9 +1,9 @@
 package com.evinfo.utils;
 
-import com.evinfo.domain.charger.domain.Charger;
-import com.evinfo.domain.charger.domain.ChargerStat;
-import com.evinfo.domain.charger.domain.ChargerType;
-import com.evinfo.domain.charger.dto.client.ChargerClientResponseDto;
+import com.evinfo.api.charger.dto.client.ChargerClientResponseDto;
+import com.evinfo.domain.charger.Charger;
+import com.evinfo.domain.charger.ChargerStat;
+import com.evinfo.domain.charger.ChargerType;
 
 import java.util.Arrays;
 import java.util.List;

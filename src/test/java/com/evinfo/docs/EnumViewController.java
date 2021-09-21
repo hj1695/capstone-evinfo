@@ -1,7 +1,7 @@
 package com.evinfo.docs;
 
-import com.evinfo.domain.charger.domain.ChargerStat;
-import com.evinfo.domain.charger.domain.ChargerType;
+import com.evinfo.domain.charger.ChargerStat;
+import com.evinfo.domain.charger.ChargerType;
 import com.evinfo.global.error.ErrorCode;
 import com.evinfo.global.error.ErrorResponse;
 import org.springframework.http.ResponseEntity;

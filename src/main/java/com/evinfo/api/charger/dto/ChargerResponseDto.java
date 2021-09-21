@@ -1,8 +1,8 @@
-package com.evinfo.domain.charger.dto;
+package com.evinfo.api.charger.dto;
 
-import com.evinfo.domain.charger.domain.Charger;
-import com.evinfo.domain.charger.domain.ChargerStat;
-import com.evinfo.domain.charger.domain.ChargerType;
+import com.evinfo.domain.charger.Charger;
+import com.evinfo.domain.charger.ChargerStat;
+import com.evinfo.domain.charger.ChargerType;
 import lombok.Getter;
 
 @Getter

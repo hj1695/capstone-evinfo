@@ -1,9 +1,9 @@
-package com.evinfo.domain.charger.service;
+package com.evinfo.api.charger.service;
 
-import com.evinfo.domain.charger.domain.Charger;
-import com.evinfo.domain.charger.dto.ChargerRequestDto;
-import com.evinfo.domain.charger.dto.ChargerResponseDto;
-import com.evinfo.domain.charger.repository.ChargerRepository;
+import com.evinfo.api.charger.dto.ChargerRequestDto;
+import com.evinfo.api.charger.dto.ChargerResponseDto;
+import com.evinfo.api.charger.repository.ChargerRepository;
+import com.evinfo.domain.charger.Charger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
