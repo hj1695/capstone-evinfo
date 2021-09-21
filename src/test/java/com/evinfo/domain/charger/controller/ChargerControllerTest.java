@@ -62,7 +62,7 @@ class ChargerControllerTest extends Documentation {
     void getChargersTest() throws Exception {
         List<ChargerResponseDto> chargerResponses = ChargerGenerator.getChargers()
                 .stream()
-                .map(ChargerResponseDto::new)
+                .map(charger -> new ChargerResponseDto(charger, 10.0))
                 .collect(Collectors.toList());
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.put("latitude", Collections.singletonList("11.11"));
@@ -100,7 +100,8 @@ class ChargerControllerTest extends Documentation {
                                 fieldWithPath("[].lat").type(JsonFieldType.NUMBER).description("충전기의 위도"),
                                 fieldWithPath("[].lng").type(JsonFieldType.NUMBER).description("충전기의 경도"),
                                 fieldWithPath("[].callNumber").type(JsonFieldType.STRING).description("충전기 충전소의 전화번호"),
-                                fieldWithPath("[].chargerStat").type(JsonFieldType.STRING).description("충전기의 상태")
+                                fieldWithPath("[].chargerStat").type(JsonFieldType.STRING).description("충전기의 상태"),
+                                fieldWithPath("[].distance").type(JsonFieldType.NUMBER).description("현재 위치 기준 충전기의 위치")
                         )
                 ));
     }
