@@ -15,17 +15,23 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -56,11 +62,16 @@ class ChargerControllerTest extends Documentation {
     void getChargersTest() throws Exception {
         List<ChargerResponseDto> chargerResponses = ChargerGenerator.getChargers()
                 .stream()
-                .map(ChargerResponseDto::new)
+                .map(charger -> new ChargerResponseDto(charger, 10.0))
                 .collect(Collectors.toList());
-        when(chargerService.getChargers()).thenReturn(chargerResponses);
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("latitude", Collections.singletonList("11.11"));
+        params.put("longitude", Collections.singletonList("22.22"));
+        params.put("size", Collections.singletonList("10"));
+        when(chargerService.getChargers(any())).thenReturn(chargerResponses);
 
         this.mockMvc.perform(get(API + "/chargers")
+                .params(params)
                 .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -72,6 +83,11 @@ class ChargerControllerTest extends Documentation {
                 .andDo(document("chargers/gets",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        requestParameters(
+                                parameterWithName("latitude").description("사용자의 위도 값"),
+                                parameterWithName("longitude").description("사용자의 경도 값"),
+                                parameterWithName("size").description("반환받고자 하는 사용자 주변 충전소 개수. 최대 1000개로 제한")
+                        ),
                         responseFields(
                                 fieldWithPath("[]").type(JsonFieldType.ARRAY).description("전체 충전기의 목록"),
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("충전기의 ID"),
@@ -84,7 +100,8 @@ class ChargerControllerTest extends Documentation {
                                 fieldWithPath("[].lat").type(JsonFieldType.NUMBER).description("충전기의 위도"),
                                 fieldWithPath("[].lng").type(JsonFieldType.NUMBER).description("충전기의 경도"),
                                 fieldWithPath("[].callNumber").type(JsonFieldType.STRING).description("충전기 충전소의 전화번호"),
-                                fieldWithPath("[].chargerStat").type(JsonFieldType.STRING).description("충전기의 상태")
+                                fieldWithPath("[].chargerStat").type(JsonFieldType.STRING).description("충전기의 상태"),
+                                fieldWithPath("[].distance").type(JsonFieldType.NUMBER).description("현재 위치 기준 충전기의 위치")
                         )
                 ));
     }

@@ -1,6 +1,7 @@
 package com.evinfo.domain.charger.service;
 
 import com.evinfo.domain.charger.domain.Charger;
+import com.evinfo.domain.charger.dto.ChargerRequestDto;
 import com.evinfo.domain.charger.dto.ChargerResponseDto;
 import com.evinfo.domain.charger.repository.ChargerRepository;
 import com.evinfo.utils.ChargerGenerator;
@@ -32,14 +33,15 @@ class ChargerServiceTest {
     @Test
     void getChargersTest() {
         List<Charger> chargers = ChargerGenerator.getChargers();
+        ChargerRequestDto request = new ChargerRequestDto(1.0, 10.0, 1L);
         when(chargerRepository.findAll()).thenReturn(chargers);
 
-        List<ChargerResponseDto> foundChargers = chargerService.getChargers();
+        List<ChargerResponseDto> foundChargers = chargerService.getChargers(request);
 
         assertThat(foundChargers)
-                .hasSize(2)
+                .hasSize(1)
                 .extracting("stationId")
-                .containsOnly(chargers.get(0).getStationId(), chargers.get(1).getStationId());
+                .containsOnly(chargers.get(0).getStationId());
     }
 
 }
