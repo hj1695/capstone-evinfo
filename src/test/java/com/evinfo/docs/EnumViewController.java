@@ -1,4 +1,4 @@
-package com.evinfo.domain.controller.docs;
+package com.evinfo.docs;
 
 import com.evinfo.domain.charger.domain.ChargerStat;
 import com.evinfo.domain.charger.domain.ChargerType;

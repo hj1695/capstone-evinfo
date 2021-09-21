@@ -1,4 +1,4 @@
-package com.evinfo.domain.controller.docs;
+package com.evinfo.docs;
 
 import lombok.Builder;
 import lombok.Getter;

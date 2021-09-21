@@ -1,10 +1,9 @@
-package com.evinfo.domain.controller;
+package com.evinfo.domain.charger.controller;
 
-import com.evinfo.domain.charger.controller.ChargerController;
+import com.evinfo.docs.Documentation;
 import com.evinfo.domain.charger.dto.ChargerResponseDto;
 import com.evinfo.domain.charger.service.ChargerClient;
 import com.evinfo.domain.charger.service.ChargerService;
-import com.evinfo.domain.controller.docs.Documentation;
 import com.evinfo.utils.ChargerGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
