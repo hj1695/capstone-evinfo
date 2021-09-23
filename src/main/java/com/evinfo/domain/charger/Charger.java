@@ -12,16 +12,18 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@IdClass(ChargerCompositeId.class)
 public class Charger {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @NotBlank
     private String stationName;
 
+    @Id
     @NotBlank
     private String stationId;
+
+    @Id
+    @NotBlank
+    private String chargerId;
 
     @Enumerated(EnumType.STRING)
     @NotNull
