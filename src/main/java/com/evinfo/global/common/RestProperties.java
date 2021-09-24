@@ -20,8 +20,18 @@ public class RestProperties {
     }
 
     @NotBlank
-    public String getEvinfoUrl() {
-        return evinfo.get("url");
+    public String getEvinfoBaseUri() {
+        return evinfo.get("baseUri");
+    }
+
+    @NotBlank
+    public String getEvinfoStatusPath() {
+        return evinfo.get("statusPath");
+    }
+
+    @NotBlank
+    public String getEvinfoInfoPath() {
+        return evinfo.get("infoPath");
     }
 
     @NotNull
@@ -32,5 +42,10 @@ public class RestProperties {
     @NotNull
     public Long getEvinfoIterator() {
         return Long.valueOf(evinfo.get("iterator"));
+    }
+
+    @NotNull
+    public Long getEvinfoPeriod() {
+        return Long.valueOf(evinfo.get("period"));
     }
 }

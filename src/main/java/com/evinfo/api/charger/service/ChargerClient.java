@@ -29,7 +29,7 @@ public class ChargerClient {
     private final RestProperties restProperties;
 
     public ChargerClient(WebClient.Builder webClientBuilder, final RestProperties restProperties) {
-        var factory = new DefaultUriBuilderFactory(restProperties.getEvinfoUrl());
+        var factory = new DefaultUriBuilderFactory(restProperties.getEvinfoBaseUri());
         factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
         var exchangeStrategies = ExchangeStrategies.builder()
                 .codecs(configurer -> configurer.defaultCodecs()
@@ -39,7 +39,7 @@ public class ChargerClient {
         this.restProperties = restProperties;
         this.webClient = webClientBuilder
                 .uriBuilderFactory(factory)
-                .baseUrl(restProperties.getEvinfoUrl())
+                .baseUrl(restProperties.getEvinfoBaseUri())
                 .exchangeStrategies(exchangeStrategies)
                 .filter(logRequest())
                 .filter(logResponse())
@@ -90,6 +90,7 @@ public class ChargerClient {
         return this.webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
+                        .path(restProperties.getEvinfoInfoPath())
                         .queryParam("serviceKey", restProperties.getEvinfoKey())
                         .queryParam("numOfRows", restProperties.getEvinfoChunk())
                         .queryParam("pageNo", page)
