@@ -19,3 +19,5 @@ spring:
     initialize-schema: always
   config:
     import: rest.yml
+    # 현재 설정된 batch 설정은 db를 매번 초기화하므로 절대 실행환경서 하면 안됨
+    # 추후 aws 올리기 전에 profile 설정 해주기!!
