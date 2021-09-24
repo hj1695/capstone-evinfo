@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: rest.yml
+server:
+  http2:
+    enabled: true
+  shutdown: graceful

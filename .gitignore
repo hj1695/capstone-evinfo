@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+/logs/
+/src/main/resources/config/rest.yml
+/src/main/resources/config/application-local.yml
+/src/main/resources/config/application-prod.yml
+/src/main/resources/config/application-test.yml
