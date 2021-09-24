@@ -78,7 +78,7 @@ public class ChargerClient {
     public List<ChargerClientResponseDto> fetchChargers() {
         return Flux.interval(Duration.ofMillis(100))
                 .take(restProperties.getEvinfoIterator())
-                .flatMap(i -> getEvinfoMono(i + 1))
+                .flatMap(i -> getChargerInfoMono(i + 1))
                 .toStream()
                 .map(EvinfoResponseDto::getBody)
                 .map(EvinfoBodyResponseDto::getItems)
@@ -86,7 +86,15 @@ public class ChargerClient {
                 .collect(Collectors.toList());
     }
 
-    private Mono<EvinfoResponseDto> getEvinfoMono(long page) {
+    public List<ChargerClientResponseDto> findModifiedChargers() {
+        EvinfoResponseDto response = getChargerStatusMono().blockOptional()
+                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+
+        return response.getBody()
+                .getItems();
+    }
+
+    private Mono<EvinfoResponseDto> getChargerInfoMono(long page) {
         return this.webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
@@ -94,6 +102,23 @@ public class ChargerClient {
                         .queryParam("serviceKey", restProperties.getEvinfoKey())
                         .queryParam("numOfRows", restProperties.getEvinfoChunk())
                         .queryParam("pageNo", page)
+                        .build())
+                .accept(MediaType.APPLICATION_XML)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.just(new HttpClientErrorException(clientResponse.statusCode())))
+                .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.just(new HttpClientErrorException(clientResponse.statusCode())))
+                .bodyToMono(EvinfoResponseDto.class);
+    }
+
+    private Mono<EvinfoResponseDto> getChargerStatusMono() {
+        return this.webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(restProperties.getEvinfoStatusPath())
+                        .queryParam("serviceKey", restProperties.getEvinfoKey())
+                        .queryParam("numOfRows", 9000) // TODO: 2021/09/24 이부분 하드코딩함. 추후 리팩토링 예정.
+                        .queryParam("pageNo", 1)
+                        .queryParam("period", restProperties.getEvinfoPeriod())
                         .build())
                 .accept(MediaType.APPLICATION_XML)
                 .retrieve()

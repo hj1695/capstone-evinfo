@@ -50,4 +50,8 @@ public class Charger {
     @Enumerated(EnumType.STRING)
     @NotNull
     private ChargerStat chargerStat;
+
+    public void updateChargerStat(final ChargerStat chargerStat) {
+        this.chargerStat = chargerStat;
+    }
 }
