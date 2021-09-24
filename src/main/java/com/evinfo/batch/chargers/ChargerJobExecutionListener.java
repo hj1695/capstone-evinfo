@@ -5,7 +5,7 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 
 @Slf4j(topic = "BATCH_FILE_LOGGER")
-public class ChargerInitJobExecutionListener implements JobExecutionListener {
+public class ChargerJobExecutionListener implements JobExecutionListener {
     @Override
     public void beforeJob(JobExecution jobExecution) {
     }
@@ -14,6 +14,6 @@ public class ChargerInitJobExecutionListener implements JobExecutionListener {
     public void afterJob(JobExecution jobExecution) {
         long time = jobExecution.getEndTime().getTime() - jobExecution.getStartTime().getTime();
 
-        log.info("ChargerInitJob 종료. 처리 시간 {} mills ", time);
+        log.info("{} 종료. 처리 시간 {} mills ", jobExecution.getJobInstance().getJobName(), time);
     }
 }
