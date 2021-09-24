@@ -6,7 +6,6 @@ import com.evinfo.api.charger.repository.ChargerRepository;
 import com.evinfo.api.charger.service.ChargerClient;
 import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerCompositeId;
-import com.evinfo.global.common.RestProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -27,48 +26,12 @@ import java.util.Objects;
 @Configuration
 @Slf4j(topic = "BATCH_FILE_LOGGER")
 @RequiredArgsConstructor
-public class ChargerConfiguration {
+public class ChargerUpdateConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final ChargerClient chargerClient;
-    private final RestProperties restProperties;
     private final ChargerRepository chargerRepository;
     private final EntityManagerFactory entityManagerFactory;
-
-    @Bean
-    public Job chargerInitJob() {
-        return jobBuilderFactory.get("chargerInitJob")
-                .incrementer(new RunIdIncrementer())
-                .start(this.chargerInitStep())
-                .listener(new ChargerJobExecutionListener())
-                .build();
-    }
-
-    @Bean
-    @JobScope
-    public Step chargerInitStep() {
-        return stepBuilderFactory.get("chargerInitStep")
-                .<ChargerClientResponseDto, Charger>chunk(restProperties.getEvinfoChunk().intValue())
-                .reader(chargerInitReader())
-                .processor(chargerInitProcessor())
-                .writer(chargerJpaWriter())
-                .build();
-    }
-
-    private ItemReader<ChargerClientResponseDto> chargerInitReader() {
-        return new LinkedListItemReader<>(chargerClient.fetchChargers());
-    }
-
-    private ItemProcessor<ChargerClientResponseDto, Charger> chargerInitProcessor() {
-        return ChargerClientResponseDto::getCharger;
-    }
-
-    private JpaItemWriter<Charger> chargerJpaWriter() {
-        JpaItemWriter<Charger> jpaItemWriter = new JpaItemWriter<>();
-        jpaItemWriter.setEntityManagerFactory(entityManagerFactory);
-
-        return jpaItemWriter;
-    }
 
     @Bean
     public Job chargerUpdateJob() {
@@ -107,5 +70,12 @@ public class ChargerConfiguration {
 
             return charger;
         };
+    }
+
+    private JpaItemWriter<Charger> chargerJpaWriter() {
+        JpaItemWriter<Charger> jpaItemWriter = new JpaItemWriter<>();
+        jpaItemWriter.setEntityManagerFactory(entityManagerFactory);
+
+        return jpaItemWriter;
     }
 }
