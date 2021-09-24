@@ -65,7 +65,6 @@ public class ChargerUpdateConfiguration {
             if (Objects.isNull(charger) || charger.getChargerStat().equals(response.getChargerStat())) {
                 return null;
             }
-            log.info("update: {} stat {} to {}", charger.getStationName(), charger.getChargerStat().getName(), response.getChargerStat().getName());
             charger.updateChargerStat(response.getChargerStat());
 
             return charger;
