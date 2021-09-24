@@ -35,6 +35,7 @@ public class ChargerConfiguration {
         return jobBuilderFactory.get("chargerInitJob")
                 .incrementer(new RunIdIncrementer())
                 .start(this.chargerInitStep())
+                .listener(new ChargerInitJobExecutionListener())
                 .build();
     }
 
