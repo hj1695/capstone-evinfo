@@ -15,7 +15,6 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.JpaItemWriter;
-import org.springframework.batch.item.support.ListItemReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -51,7 +50,7 @@ public class ChargerConfiguration {
     }
 
     private ItemReader<ChargerClientResponseDto> chargerInitReader() {
-        return new ListItemReader<>(chargerClient.fetchChargers());
+        return new LinkedListItemReader<>(chargerClient.fetchChargers());
     }
 
     private ItemProcessor<ChargerClientResponseDto, Charger> chargerInitProcessor() {
