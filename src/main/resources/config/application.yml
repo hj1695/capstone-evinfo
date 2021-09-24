@@ -1,8 +1,6 @@
 spring:
   config:
     import: rest.yml
-  profiles:
-    active: local
 server:
   http2:
     enabled: true
