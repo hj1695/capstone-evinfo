@@ -27,4 +27,20 @@ class RestPropertiesTest {
 
         assertThat(url).isNotBlank();
     }
+
+    @DisplayName("Evinfo의 chunk를 가져오는 동작이 올바르게 수행된다.")
+    @Test
+    void getEvinfoChunkTest() {
+        final Long chunk = restProperties.getEvinfoChunk();
+
+        assertThat(chunk).isNotNull();
+    }
+
+    @DisplayName("Evinfo의 iterator를 가져오는 동작이 올바르게 수행된다.")
+    @Test
+    void getEvinfoIteratorTest() {
+        final Long iterator = restProperties.getEvinfoIterator();
+
+        assertThat(iterator).isNotNull();
+    }
 }
