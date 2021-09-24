@@ -1,9 +1,9 @@
-package com.evinfo.domain.charger.controller;
+package com.evinfo.api.charger.controller;
 
+import com.evinfo.api.charger.dto.ChargerResponseDto;
+import com.evinfo.api.charger.service.ChargerClient;
+import com.evinfo.api.charger.service.ChargerService;
 import com.evinfo.docs.Documentation;
-import com.evinfo.domain.charger.dto.ChargerResponseDto;
-import com.evinfo.domain.charger.service.ChargerClient;
-import com.evinfo.domain.charger.service.ChargerService;
 import com.evinfo.utils.ChargerGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -75,8 +75,8 @@ class ChargerControllerTest extends Documentation {
                 .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].id").value(chargerResponses.get(0).getId()))
-                .andExpect(jsonPath("$[1].id").value(chargerResponses.get(1).getId()))
+                .andExpect(jsonPath("$[0].stationId").value(chargerResponses.get(0).getStationId()))
+                .andExpect(jsonPath("$[1].stationId").value(chargerResponses.get(1).getStationId()))
                 .andExpect(jsonPath("$[0].stationName").value(chargerResponses.get(0).getStationName()))
                 .andExpect(jsonPath("$[1].stationName").value(chargerResponses.get(1).getStationName()))
                 .andDo(print())
@@ -90,9 +90,9 @@ class ChargerControllerTest extends Documentation {
                         ),
                         responseFields(
                                 fieldWithPath("[]").type(JsonFieldType.ARRAY).description("전체 충전기의 목록"),
-                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("충전기의 ID"),
                                 fieldWithPath("[].stationName").type(JsonFieldType.STRING).description("충전기 충전소의 이름"),
                                 fieldWithPath("[].stationId").type(JsonFieldType.STRING).description("충전기 충전소의 ID"),
+                                fieldWithPath("[].chargerId").type(JsonFieldType.STRING).description("개별 충전기의 ID"),
                                 fieldWithPath("[].chargerType").type(JsonFieldType.STRING).description("충전기의 타입"),
                                 fieldWithPath("[].address").type(JsonFieldType.STRING).description("충전기의 주소"),
                                 fieldWithPath("[].location").type(JsonFieldType.STRING).description("충전기의 세부 주소"),

@@ -1,4 +1,4 @@
-package com.evinfo.domain.charger.domain;
+package com.evinfo.domain.charger;
 
 import lombok.*;
 
@@ -12,16 +12,18 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@IdClass(ChargerCompositeId.class)
 public class Charger {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @NotBlank
     private String stationName;
 
+    @Id
     @NotBlank
     private String stationId;
+
+    @Id
+    @NotBlank
+    private String chargerId;
 
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -30,6 +32,7 @@ public class Charger {
     @NotBlank
     private String address;
 
+    @NotNull
     private String location;
 
     @NotNull

@@ -1,8 +1,8 @@
-package com.evinfo.domain.charger.dto.client;
+package com.evinfo.api.charger.dto.client;
 
-import com.evinfo.domain.charger.domain.Charger;
-import com.evinfo.domain.charger.domain.ChargerStat;
-import com.evinfo.domain.charger.domain.ChargerType;
+import com.evinfo.domain.charger.Charger;
+import com.evinfo.domain.charger.ChargerStat;
+import com.evinfo.domain.charger.ChargerType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +22,7 @@ public class ChargerClientResponseDto {
     // TODO: 2021/09/10 일단 필요한 값 다 넣었음. 추후 제거하기
     private String statNm;
     private String statId;
+    private String chgerId;
     private Long chgerType;
     private String addr;
     private String location;
@@ -52,6 +53,7 @@ public class ChargerClientResponseDto {
         return Charger.builder()
                 .stationName(this.statNm)
                 .stationId(this.statId)
+                .chargerId(chgerId)
                 .chargerType(ChargerType.valueOf(this.chgerType))
                 .address(this.addr)
                 .location(this.location)

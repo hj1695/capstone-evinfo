@@ -1,10 +1,8 @@
-package com.evinfo.domain.charger.service;
+package com.evinfo.api.charger.service;
 
-import com.evinfo.domain.charger.domain.Charger;
-import com.evinfo.domain.charger.dto.client.ChargerClientResponseDto;
-import com.evinfo.domain.charger.dto.client.EvinfoBodyResponseDto;
-import com.evinfo.domain.charger.dto.client.EvinfoResponseDto;
-import com.evinfo.domain.charger.repository.ChargerRepository;
+import com.evinfo.api.charger.dto.client.ChargerClientResponseDto;
+import com.evinfo.api.charger.dto.client.EvinfoBodyResponseDto;
+import com.evinfo.api.charger.dto.client.EvinfoResponseDto;
 import com.evinfo.global.common.RestProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,12 +27,10 @@ import java.util.stream.Collectors;
 public class ChargerClient {
     private final WebClient webClient;
     private final RestProperties restProperties;
-    private final ChargerRepository chargerRepository;
 
-    public ChargerClient(WebClient.Builder webClientBuilder, final RestProperties restProperties, final ChargerRepository chargerRepository) {
+    public ChargerClient(WebClient.Builder webClientBuilder, final RestProperties restProperties) {
         var factory = new DefaultUriBuilderFactory(restProperties.getEvinfoUrl());
         factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-        this.chargerRepository = chargerRepository;
         var exchangeStrategies = ExchangeStrategies.builder()
                 .codecs(configurer -> configurer.defaultCodecs()
                         .maxInMemorySize(10 * 1024 * 1024)) // TODO: 2021/09/20 이거 yml에 직접 넣쟈?
@@ -79,17 +75,7 @@ public class ChargerClient {
         });
     }
 
-    public void fetchChargers() {
-        List<Charger> chargers = getChargers()
-                .stream()
-                .map(ChargerClientResponseDto::getCharger)
-                .collect(Collectors.toList());
-
-        chargerRepository.deleteAll();
-        chargerRepository.saveAll(chargers);
-    }
-
-    public List<ChargerClientResponseDto> getChargers() {
+    public List<ChargerClientResponseDto> fetchChargers() {
         return Flux.interval(Duration.ofMillis(100))
                 .take(restProperties.getEvinfoIterator())
                 .flatMap(i -> getEvinfoMono(i + 1))

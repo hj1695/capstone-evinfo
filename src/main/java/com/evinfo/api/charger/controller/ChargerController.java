@@ -1,9 +1,9 @@
-package com.evinfo.domain.charger.controller;
+package com.evinfo.api.charger.controller;
 
-import com.evinfo.domain.charger.dto.ChargerRequestDto;
-import com.evinfo.domain.charger.dto.ChargerResponseDto;
-import com.evinfo.domain.charger.service.ChargerClient;
-import com.evinfo.domain.charger.service.ChargerService;
+import com.evinfo.api.charger.dto.ChargerRequestDto;
+import com.evinfo.api.charger.dto.ChargerResponseDto;
+import com.evinfo.api.charger.service.ChargerClient;
+import com.evinfo.api.charger.service.ChargerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,6 @@ public class ChargerController {
 
     @GetMapping("/chargers")
     public ResponseEntity<List<ChargerResponseDto>> getChargers(@Valid ChargerRequestDto request) {
-        chargerClient.fetchChargers(); // TODO: 2021/09/21 이부분은 추후 batch 적용시 삭제할 예정
         final List<ChargerResponseDto> responses = chargerService.getChargers(request);
 
         return ResponseEntity.ok()
