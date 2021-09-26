@@ -14,8 +14,7 @@ public abstract class Documentation {
 
     protected static OperationRequestPreprocessor getDocumentRequest() {
         return preprocessRequest(modifyUris()
-                        .scheme("https")
-                        .host("evinfo.com")
+                        .scheme("http")
                         .removePort(),
                 prettyPrint());
     }
