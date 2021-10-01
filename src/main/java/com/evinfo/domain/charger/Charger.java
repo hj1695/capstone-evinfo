@@ -39,10 +39,10 @@ public class Charger {
     private String useTime;
 
     @NotNull
-    private Double lat;
+    private Double latitude;
 
     @NotNull
-    private Double lng;
+    private Double longitude;
 
     @NotBlank
     private String callNumber;

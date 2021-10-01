@@ -58,8 +58,8 @@ public class ChargerClientResponseDto {
                 .address(this.addr)
                 .location(this.location)
                 .useTime(this.useTime)
-                .lat(this.lat)
-                .lng(this.lng)
+                .latitude(this.lat)
+                .longitude(this.lng)
                 .callNumber(this.busiCall)
                 .chargerStat(ChargerStat.valueOf(this.stat))
                 .build();

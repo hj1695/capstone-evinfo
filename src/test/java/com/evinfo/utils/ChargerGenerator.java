@@ -36,8 +36,8 @@ public class ChargerGenerator {
                 .address(충전기_주소)
                 .location(충전기_세부_주소)
                 .useTime(충전기_사용시간)
-                .lat(충전기_위도_1)
-                .lng(충전기_경도_1)
+                .latitude(충전기_위도_1)
+                .longitude(충전기_경도_1)
                 .callNumber(충전기_전화번호)
                 .chargerStat(충전기_상태)
                 .build();
@@ -49,8 +49,8 @@ public class ChargerGenerator {
                 .address(충전기_주소)
                 .location(충전기_세부_주소)
                 .useTime(충전기_사용시간)
-                .lat(충전기_위도_2)
-                .lng(충전기_경도_2)
+                .latitude(충전기_위도_2)
+                .longitude(충전기_경도_2)
                 .callNumber(충전기_전화번호)
                 .chargerStat(충전기_상태)
                 .build();
@@ -74,8 +74,8 @@ public class ChargerGenerator {
                         .addr(charger1.getAddress())
                         .location(charger1.getLocation())
                         .useTime(charger1.getUseTime())
-                        .lat(charger1.getLat())
-                        .lng(charger1.getLng())
+                        .lat(charger1.getLatitude())
+                        .lng(charger1.getLongitude())
                         .busiCall(charger1.getCallNumber())
                         .stat(charger1.getChargerStat().getKey())
                         .build(),
@@ -87,8 +87,8 @@ public class ChargerGenerator {
                         .addr(charger2.getAddress())
                         .location(charger2.getLocation())
                         .useTime(charger2.getUseTime())
-                        .lat(charger2.getLat())
-                        .lng(charger2.getLng())
+                        .lat(charger2.getLatitude())
+                        .lng(charger2.getLongitude())
                         .busiCall(charger2.getCallNumber())
                         .stat(charger2.getChargerStat().getKey())
                         .build());
