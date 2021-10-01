@@ -97,8 +97,8 @@ class ChargerControllerTest extends Documentation {
                                 fieldWithPath("[].address").type(JsonFieldType.STRING).description("충전기의 주소"),
                                 fieldWithPath("[].location").type(JsonFieldType.STRING).description("충전기의 세부 주소"),
                                 fieldWithPath("[].useTime").type(JsonFieldType.STRING).description("충전기의 사용 가능 시간"),
-                                fieldWithPath("[].lat").type(JsonFieldType.NUMBER).description("충전기의 위도"),
-                                fieldWithPath("[].lng").type(JsonFieldType.NUMBER).description("충전기의 경도"),
+                                fieldWithPath("[].latitude").type(JsonFieldType.NUMBER).description("충전기의 위도"),
+                                fieldWithPath("[].longitude").type(JsonFieldType.NUMBER).description("충전기의 경도"),
                                 fieldWithPath("[].callNumber").type(JsonFieldType.STRING).description("충전기 충전소의 전화번호"),
                                 fieldWithPath("[].chargerStat").type(JsonFieldType.STRING).description("충전기의 상태"),
                                 fieldWithPath("[].distance").type(JsonFieldType.NUMBER).description("현재 위치 기준 충전기의 위치")

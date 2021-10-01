@@ -32,7 +32,7 @@ public class ChargerService {
     }
 
     private Double calculateDistance(Charger charger, ChargerRequestDto request) {
-        return Math.sqrt(Math.pow(charger.getLng() - request.getLongitude(), 2.0)
-                + Math.pow(charger.getLat() - request.getLatitude(), 2.0));
+        return Math.sqrt(Math.pow(charger.getLongitude() - request.getLongitude(), 2.0)
+                + Math.pow(charger.getLatitude() - request.getLatitude(), 2.0));
     }
 }

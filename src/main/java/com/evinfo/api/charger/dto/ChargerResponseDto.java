@@ -14,8 +14,8 @@ public class ChargerResponseDto {
     private final String address;
     private final String location;
     private final String useTime;
-    private final Double lat;
-    private final Double lng;
+    private final Double latitude;
+    private final Double longitude;
     private final String callNumber;
     private final ChargerStat chargerStat;
     private final Double distance;
@@ -28,8 +28,8 @@ public class ChargerResponseDto {
         this.address = charger.getAddress();
         this.location = charger.getLocation();
         this.useTime = charger.getUseTime();
-        this.lat = charger.getLat();
-        this.lng = charger.getLng();
+        this.latitude = charger.getLatitude();
+        this.longitude = charger.getLongitude();
         this.callNumber = charger.getCallNumber();
         this.chargerStat = charger.getChargerStat();
         this.distance = distance;
