@@ -2,7 +2,6 @@ package com.evinfo.api.charger.dto;
 
 import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
-import com.evinfo.domain.charger.ChargerType;
 import lombok.Getter;
 
 @Getter
@@ -10,7 +9,10 @@ public class ChargerResponseDto {
     private final String stationName;
     private final String stationId;
     private final String chargerId;
-    private final ChargerType chargerType;
+    private final Boolean isDCCombo;
+    private final Boolean isDCDemo;
+    private final Boolean isAC3;
+    private final Boolean isACSlow;
     private final String address;
     private final String location;
     private final String useTime;
@@ -24,7 +26,6 @@ public class ChargerResponseDto {
         this.stationName = charger.getStationName();
         this.stationId = charger.getStationId();
         this.chargerId = charger.getChargerId();
-        this.chargerType = charger.getChargerType();
         this.address = charger.getAddress();
         this.location = charger.getLocation();
         this.useTime = charger.getUseTime();
@@ -33,5 +34,10 @@ public class ChargerResponseDto {
         this.callNumber = charger.getCallNumber();
         this.chargerStat = charger.getChargerStat();
         this.distance = distance;
+        this.isDCCombo = charger.getChargerType().isDCCombo();
+        this.isDCDemo = charger.getChargerType().isDCDemo();
+        this.isAC3 = charger.getChargerType().isAC3();
+        this.isACSlow = charger.getChargerType().isACSlow();
+
     }
 }
