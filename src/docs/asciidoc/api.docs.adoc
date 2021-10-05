@@ -41,7 +41,6 @@ include::{snippets}/common/response-fields.adoc[]
 === Enum Types
 
 include::{snippets}/common/custom-response-fields-errorCodes.adoc[]
-include::{snippets}/common/custom-response-fields-chargerTypes.adoc[]
 include::{snippets}/common/custom-response-fields-chargerStats.adoc[]
 
 [[resources]]

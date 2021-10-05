@@ -88,10 +88,6 @@ class CommonDocumentationTest extends Documentation {
                                 attributes(key("title").value("에러코드")),
                                 enumConvertFieldDescriptor(docs.getErrorCodes())
                         ),
-                        customResponseFields("custom-response", beneathPath("chargerTypes").withSubsectionId("chargerTypes"),
-                                attributes(key("title").value("충전기 타입")),
-                                enumConvertFieldDescriptor(docs.getChargerTypes())
-                        ),
                         customResponseFields("custom-response", beneathPath("chargerStats").withSubsectionId("chargerStats"),
                                 attributes(key("title").value("충전기 상태")),
                                 enumConvertFieldDescriptor(docs.getChargerStats())
