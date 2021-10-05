@@ -14,13 +14,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @IdClass(ChargerCompositeId.class)
 public class Charger {
-    @NotBlank
-    private String stationName;
-
-    @Id
-    @NotBlank
-    private String stationId;
-
     @Id
     @NotBlank
     private String chargerId;
@@ -29,29 +22,20 @@ public class Charger {
     @NotNull
     private ChargerType chargerType;
 
-    @NotBlank
-    private String address;
-
-    @NotNull
-    private String location;
-
-    @NotNull
-    private String useTime;
-
-    @NotNull
-    private Double latitude;
-
-    @NotNull
-    private Double longitude;
-
-    @NotBlank
-    private String callNumber;
-
     @Enumerated(EnumType.STRING)
     @NotNull
     private ChargerStat chargerStat;
 
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "STATION_ID")
+    private Station station;
+
     public void updateChargerStat(final ChargerStat chargerStat) {
         this.chargerStat = chargerStat;
+    }
+
+    public void updateStation(final Station station) {
+        this.station = station;
     }
 }
