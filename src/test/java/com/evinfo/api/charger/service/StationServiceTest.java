@@ -38,7 +38,7 @@ class StationServiceTest {
     void getStationsTest() {
         List<Station> stations = ChargerGenerator.getStations();
         StationRequestDto request = new StationRequestDto(사용자_위도, 사용자_경도, 사용자_요구_데이터_크기);
-        when(stationRepository.findAll()).thenReturn(stations);
+        when(stationRepository.findAllJoinFetch()).thenReturn(stations);
 
         List<StationResponseDto> foundStations = stationService.getStations(request);
 
