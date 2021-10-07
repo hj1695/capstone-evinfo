@@ -22,10 +22,11 @@ public class StationService {
 
     @Transactional(readOnly = true)
     public List<StationResponseDto> getStations(StationRequestDto request) {
-        List<StationResponseDto> responses = stationRepository.findAll()
+        List<StationResponseDto> responses = stationRepository.findAllJoinFetch()
                 .stream()
                 .map(station -> {
                     Double distance = calculateDistance(station, request);
+
                     return new StationResponseDto(station, distance);
                 })
                 .sorted(Comparator.comparing(StationResponseDto::getDistance))
