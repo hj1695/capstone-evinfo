@@ -9,13 +9,13 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @Getter
-public class ChargerUpdateClientRequestDto {
+public class ChargerUpdateRequestDto {
     private final String stationId;
     private final String chargerId;
     private final ChargerStat chargerStat;
 
-    public static ChargerUpdateClientRequestDto valueOf(final ChargerClientResponseDto clientResponse) {
-        return ChargerUpdateClientRequestDto.builder()
+    public static ChargerUpdateRequestDto valueOf(final ChargerClientResponseDto clientResponse) {
+        return ChargerUpdateRequestDto.builder()
                 .stationId(clientResponse.getStatId())
                 .chargerId(clientResponse.getChgerId())
                 .chargerStat(ChargerStat.valueOf(clientResponse.getStat()))

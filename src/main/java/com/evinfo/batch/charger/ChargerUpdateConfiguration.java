@@ -2,7 +2,7 @@ package com.evinfo.batch.charger;
 
 import com.evinfo.api.charger.repository.ChargerRepository;
 import com.evinfo.api.charger.service.ChargerClient;
-import com.evinfo.batch.charger.dto.ChargerUpdateClientRequestDto;
+import com.evinfo.batch.charger.dto.ChargerUpdateRequestDto;
 import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerCompositeId;
 import lombok.RequiredArgsConstructor;
@@ -46,22 +46,22 @@ public class ChargerUpdateConfiguration {
     @JobScope
     public Step chargerUpdateStep() {
         return stepBuilderFactory.get("chargerUpdateStep")
-                .<ChargerUpdateClientRequestDto, Charger>chunk(1000)
+                .<ChargerUpdateRequestDto, Charger>chunk(1000)
                 .reader(chargerUpdateReader())
                 .processor(chargerUpdateProcessor())
                 .writer(chargerJpaWriter())
                 .build();
     }
 
-    private ItemReader<ChargerUpdateClientRequestDto> chargerUpdateReader() {
+    private ItemReader<ChargerUpdateRequestDto> chargerUpdateReader() {
         var updateChargerRequests = chargerClient.findModifiedChargers()
                 .stream()
-                .map(ChargerUpdateClientRequestDto::valueOf)
+                .map(ChargerUpdateRequestDto::valueOf)
                 .collect(Collectors.toList());
         return new LinkedListItemReader<>(updateChargerRequests);
     }
 
-    private ItemProcessor<ChargerUpdateClientRequestDto, Charger> chargerUpdateProcessor() {
+    private ItemProcessor<ChargerUpdateRequestDto, Charger> chargerUpdateProcessor() {
         return item -> {
             var charger = chargerRepository.findById(new ChargerCompositeId(item.getStationId(), item.getChargerId()))
                     .orElse(null);
