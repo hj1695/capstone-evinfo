@@ -3,6 +3,7 @@ package com.evinfo.api.charger.controller;
 import com.evinfo.api.charger.dto.StationResponseDto;
 import com.evinfo.api.charger.service.StationService;
 import com.evinfo.docs.Documentation;
+import com.evinfo.global.error.ErrorCode;
 import com.evinfo.utils.ChargerGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +42,7 @@ class StationControllerTest extends Documentation {
     private static final String API = "/api";
     private static final String 사용자_위도 = "11.22";
     private static final String 사용자_경도 = "22.33";
-    private static final String 사용자_요구_페이지 = "10";
+    private static final String 사용자_요구_데이터_크기 = "10";
 
     @MockBean
     private StationService stationService;
@@ -66,7 +67,7 @@ class StationControllerTest extends Documentation {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.put("latitude", Collections.singletonList(사용자_위도));
         params.put("longitude", Collections.singletonList(사용자_경도));
-        params.put("size", Collections.singletonList(사용자_요구_페이지));
+        params.put("size", Collections.singletonList(사용자_요구_데이터_크기));
         when(stationService.getStations(any())).thenReturn(stationResponses);
 
         this.mockMvc.perform(get(API + "/stations")
@@ -109,5 +110,57 @@ class StationControllerTest extends Documentation {
                 ));
     }
 
-    // TODO: 2021/10/07 예외 테스트(각각의 인자에 대한, 수행)
+    @DisplayName("예외 테스트: '/stations'로 GET 요청 시, 위도 정보가 누락되면 예외를 반환한다.")
+    @Test
+    void getStationsWithoutLatitudeTest() throws Exception {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("latitude", Collections.emptyList());
+        params.put("longitude", Collections.singletonList(사용자_경도));
+        params.put("size", Collections.singletonList(사용자_요구_데이터_크기));
+
+        this.mockMvc.perform(get(API + "/stations")
+                .params(params)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("message").value(ErrorCode.INVALID_INPUT_VALUE.getMessage()))
+                .andExpect(jsonPath("status").value(ErrorCode.INVALID_INPUT_VALUE.getStatus()))
+                .andExpect(jsonPath("code").value(ErrorCode.INVALID_INPUT_VALUE.getCode()))
+                .andDo(print());
+    }
+
+    @DisplayName("예외 테스트: '/stations'로 GET 요청 시, 경도 정보가 누락되면 예외를 반환한다.")
+    @Test
+    void getStationsWithoutLongitudeTest() throws Exception {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("latitude", Collections.singletonList(사용자_위도));
+        params.put("longitude", Collections.emptyList());
+        params.put("size", Collections.singletonList(사용자_요구_데이터_크기));
+
+        this.mockMvc.perform(get(API + "/stations")
+                .params(params)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("message").value(ErrorCode.INVALID_INPUT_VALUE.getMessage()))
+                .andExpect(jsonPath("status").value(ErrorCode.INVALID_INPUT_VALUE.getStatus()))
+                .andExpect(jsonPath("code").value(ErrorCode.INVALID_INPUT_VALUE.getCode()))
+                .andDo(print());
+    }
+
+    @DisplayName("예외 테스트: '/stations'로 GET 요청 시, 경도 정보가 누락되면 예외를 반환한다.")
+    @Test
+    void getStationsWithoutSizeTest() throws Exception {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("latitude", Collections.singletonList(사용자_위도));
+        params.put("longitude", Collections.singletonList(사용자_경도));
+        params.put("size", Collections.emptyList());
+
+        this.mockMvc.perform(get(API + "/stations")
+                .params(params)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("message").value(ErrorCode.INVALID_INPUT_VALUE.getMessage()))
+                .andExpect(jsonPath("status").value(ErrorCode.INVALID_INPUT_VALUE.getStatus()))
+                .andExpect(jsonPath("code").value(ErrorCode.INVALID_INPUT_VALUE.getCode()))
+                .andDo(print());
+    }
 }
