@@ -15,6 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,7 +40,7 @@ class StationServiceTest {
     void getStationsTest() {
         List<Station> stations = ChargerGenerator.getStations();
         StationRequestDto request = new StationRequestDto(사용자_위도, 사용자_경도, 사용자_요구_데이터_크기);
-        when(stationRepository.findAllJoinFetch()).thenReturn(stations);
+        when(stationRepository.findAllByPosition(anyDouble(), anyDouble(), anyLong())).thenReturn(stations);
 
         List<StationResponseDto> foundStations = stationService.getStations(request);
 
