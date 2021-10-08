@@ -7,9 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface StationRepository extends JpaRepository<Station, String> {
-    @Query("select a from Station a join fetch a.chargers")
-    List<Station> findAllJoinFetch();
-
     @Query(value = "SELECT _station.*,\n" +
             "       (6371 * acos(\n" +
             "                       cos(radians(_station.latitude))\n" +
