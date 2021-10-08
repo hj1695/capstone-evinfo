@@ -10,12 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ChargerGenerator {
-    private static final String 충전소_이름_1 = "충전소 이름 1";
-    private static final String 충전소_이름_2 = "충전소 이름 2";
-    private static final String 충전소_ID_1 = "충전소_ID_1";
-    private static final String 충전소_ID_2 = "충전소_ID_2";
-    private static final String 충전기_ID_1 = "충전기_ID_1";
-    private static final String 충전기_ID_2 = "충전기_ID_2";
+    private static final String 충전소_이름_1 = "충전기 충전소 이름 1";
+    private static final String 충전소_이름_2 = "충전기 충전소 이름 2";
+    private static final String 충전소_ID_1 = "충전기 충전소 ID 1";
+    private static final String 충전소_ID_2 = "충전기 충전소 ID 2";
+    private static final String 충전기_ID_1 = "충전기 충전기 ID 1";
+    private static final String 충전기_ID_2 = "충전기 충전기 ID 2";
     private static final ChargerType 충전기_충전_타입 = ChargerType.TYPE01;
     private static final String 충전소_주소 = "주소 예시";
     private static final String 충전소_세부_주소 = "주소 세부설명 예시";

@@ -31,7 +31,6 @@ public class StationService {
 
                     return new StationResponseDto(station, distance);
                 })
-                //.sorted(Comparator.comparing(StationResponseDto::getDistance))
                 .collect(Collectors.toList());
         if (request.getSize() > responses.size())
             return responses;
