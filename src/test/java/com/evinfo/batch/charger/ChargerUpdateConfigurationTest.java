@@ -3,7 +3,7 @@ package com.evinfo.batch;
 import com.evinfo.TestConfiguration;
 import com.evinfo.api.charger.repository.ChargerRepository;
 import com.evinfo.api.charger.service.ChargerClient;
-import com.evinfo.batch.chargers.ChargerUpdateConfiguration;
+import com.evinfo.batch.charger.ChargerUpdateConfiguration;
 import com.evinfo.utils.ChargerGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;

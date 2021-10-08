@@ -1,7 +1,7 @@
-package com.evinfo.batch.chargers.scheduler;
+package com.evinfo.batch.charger.scheduler;
 
-import com.evinfo.batch.chargers.ChargerInitConfiguration;
-import com.evinfo.batch.chargers.ChargerUpdateConfiguration;
+import com.evinfo.batch.charger.ChargerInitConfiguration;
+import com.evinfo.batch.charger.ChargerUpdateConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;

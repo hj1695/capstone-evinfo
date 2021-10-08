@@ -1,4 +1,4 @@
-package com.evinfo.batch.chargers;
+package com.evinfo.batch.charger;
 
 import org.springframework.aop.support.AopUtils;
 import org.springframework.batch.item.ItemReader;

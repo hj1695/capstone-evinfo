@@ -1,9 +1,8 @@
-package com.evinfo.batch.chargers;
+package com.evinfo.batch.charger;
 
-import com.evinfo.api.charger.dto.ChargerModifiedResponseDto;
-import com.evinfo.api.charger.dto.client.ChargerClientResponseDto;
 import com.evinfo.api.charger.repository.ChargerRepository;
 import com.evinfo.api.charger.service.ChargerClient;
+import com.evinfo.batch.charger.dto.ChargerUpdateRequestDto;
 import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerCompositeId;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Configuration
 @Slf4j(topic = "BATCH_FILE_LOGGER")
@@ -46,26 +46,29 @@ public class ChargerUpdateConfiguration {
     @JobScope
     public Step chargerUpdateStep() {
         return stepBuilderFactory.get("chargerUpdateStep")
-                .<ChargerClientResponseDto, Charger>chunk(1000)
+                .<ChargerUpdateRequestDto, Charger>chunk(1000)
                 .reader(chargerUpdateReader())
                 .processor(chargerUpdateProcessor())
                 .writer(chargerJpaWriter())
                 .build();
     }
 
-    private ItemReader<ChargerClientResponseDto> chargerUpdateReader() {
-        return new LinkedListItemReader<>(chargerClient.findModifiedChargers());
+    private ItemReader<ChargerUpdateRequestDto> chargerUpdateReader() {
+        var updateChargerRequests = chargerClient.findModifiedChargers()
+                .stream()
+                .map(ChargerUpdateRequestDto::valueOf)
+                .collect(Collectors.toList());
+        return new LinkedListItemReader<>(updateChargerRequests);
     }
 
-    private ItemProcessor<ChargerClientResponseDto, Charger> chargerUpdateProcessor() {
+    private ItemProcessor<ChargerUpdateRequestDto, Charger> chargerUpdateProcessor() {
         return item -> {
-            var response = ChargerModifiedResponseDto.valueOf(item);
-            var charger = chargerRepository.findById(new ChargerCompositeId(response.getStationId(), response.getChargerId()))
+            var charger = chargerRepository.findById(new ChargerCompositeId(item.getStationId(), item.getChargerId()))
                     .orElse(null);
-            if (Objects.isNull(charger) || charger.getChargerStat().equals(response.getChargerStat())) {
+            if (Objects.isNull(charger) || charger.getChargerStat().equals(item.getChargerStat())) {
                 return null;
             }
-            charger.updateChargerStat(response.getChargerStat());
+            charger.updateChargerStat(item.getChargerStat());
 
             return charger;
         };

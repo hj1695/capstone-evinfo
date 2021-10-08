@@ -12,7 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ChargerCompositeId implements Serializable {
-    private String stationId;
+    private String station;
     private String chargerId;
 
     @Override
@@ -20,11 +20,11 @@ public class ChargerCompositeId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChargerCompositeId chargerId1 = (ChargerCompositeId) o;
-        return stationId.equals(chargerId1.stationId) && chargerId.equals(chargerId1.chargerId);
+        return station.equals(chargerId1.station) && chargerId.equals(chargerId1.chargerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(stationId, chargerId);
+        return Objects.hash(station, chargerId);
     }
 }
