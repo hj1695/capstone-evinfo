@@ -3,6 +3,7 @@ package com.evinfo.api.charger.dto.client;
 import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.ChargerType;
+import com.evinfo.domain.charger.Station;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,7 +39,6 @@ public class ChargerClientResponseDto {
     private String lastTsdt;
     private String lastTedt;
     private String nowTsdt;
-    private String powerType;
     private Long output;
     private String method;
     private Long zcode;
@@ -51,17 +51,22 @@ public class ChargerClientResponseDto {
 
     public Charger getCharger() {
         return Charger.builder()
-                .stationName(this.statNm)
-                .stationId(this.statId)
-                .chargerId(chgerId)
+                .chargerId(this.chgerId)
                 .chargerType(ChargerType.valueOf(this.chgerType))
+                .chargerStat(ChargerStat.valueOf(this.stat))
+                .build();
+    }
+
+    public Station getStation() {
+        return Station.builder()
+                .stationId(this.statId)
+                .stationName(this.statNm)
                 .address(this.addr)
                 .location(this.location)
                 .useTime(this.useTime)
-                .lat(this.lat)
-                .lng(this.lng)
+                .latitude(this.lat)
+                .longitude(this.lng)
                 .callNumber(this.busiCall)
-                .chargerStat(ChargerStat.valueOf(this.stat))
                 .build();
     }
 }

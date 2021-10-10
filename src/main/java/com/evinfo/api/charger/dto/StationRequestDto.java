@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChargerRequestDto {
+public class StationRequestDto {
     @NotNull
     Double latitude;
     @NotNull

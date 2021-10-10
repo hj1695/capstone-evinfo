@@ -41,17 +41,16 @@ include::{snippets}/common/response-fields.adoc[]
 === Enum Types
 
 include::{snippets}/common/custom-response-fields-errorCodes.adoc[]
-include::{snippets}/common/custom-response-fields-chargerTypes.adoc[]
 include::{snippets}/common/custom-response-fields-chargerStats.adoc[]
 
 [[resources]]
 = API
 
-[[resources-chargers]]
-== Chargers
+[[resources-stations]]
+== 충전소
 
-[[resources-posts-gets]]
-=== 게시물 전체 조회
+[[resources-stations-gets]]
+=== 충전소 전체 조회
 
-operation::chargers/gets[snippets='http-request,http-response,request-parameters,response-fields']
+operation::stations/gets[snippets='http-request,http-response,request-parameters,response-fields']
 

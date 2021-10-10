@@ -26,4 +26,27 @@ public enum ChargerType {
                 .findFirst()
                 .orElse(UNKNOWN);
     }
+
+    public Boolean isDCCombo() {
+        return this.key == 4L ||
+                this.key == 5L ||
+                this.key == 6L;
+    }
+
+    public Boolean isDCDemo() {
+        return this.key == 1L ||
+                this.key == 3L ||
+                this.key == 5L ||
+                this.key == 6L;
+    }
+
+    public Boolean isAC3() {
+        return this.key == 3L ||
+                this.key == 6L ||
+                this.key == 7L;
+    }
+
+    public Boolean isACSlow() {
+        return this.key == 2L;
+    }
 }

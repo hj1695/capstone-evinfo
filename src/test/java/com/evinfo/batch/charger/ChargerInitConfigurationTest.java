@@ -2,8 +2,8 @@ package com.evinfo.batch.charger;
 
 import com.evinfo.TestConfiguration;
 import com.evinfo.api.charger.repository.ChargerRepository;
+import com.evinfo.api.charger.repository.StationRepository;
 import com.evinfo.api.charger.service.ChargerClient;
-import com.evinfo.batch.chargers.ChargerInitConfiguration;
 import com.evinfo.global.config.PropertiesConfig;
 import com.evinfo.utils.ChargerGenerator;
 import org.assertj.core.api.Assertions;
@@ -31,6 +31,8 @@ class ChargerInitConfigurationTest {
 
     @Autowired
     private ChargerRepository chargerRepository;
+    @Autowired
+    private StationRepository stationRepository;
 
     @MockBean
     private ChargerClient chargerClient;
@@ -54,8 +56,8 @@ class ChargerInitConfigurationTest {
         Assertions.assertThat(jobExecution.getStepExecutions().stream()
                 .mapToInt(StepExecution::getWriteCount)
                 .sum())
-                .isEqualTo(chargerRepository.count())
-                .isEqualTo(2);
+                .isEqualTo(chargerRepository.count() + stationRepository.count())
+                .isEqualTo(4);
     }
 }
 
