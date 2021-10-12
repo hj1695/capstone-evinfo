@@ -21,7 +21,7 @@ public class ChargerScheduler {
     private final JobLauncher jobLauncher;
     private final JobExplorer jobExplorer;
 
-    @Scheduled(cron = "0 0/2 * * * *")
+    @Scheduled(cron = "0 0/10 * * * *")
     public void runUpdateJob() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         jobLauncher.run(
                 chargerUpdateConfiguration.chargerUpdateJob(), new JobParametersBuilder(jobExplorer)
