@@ -28,6 +28,7 @@ public class ChargerGenerator {
     private static final Double 충전소_경도_2 = 20.0;
     private static final String 충전소_전화번호 = "010-1234-5678";
     private static final ChargerStat 충전기_상태 = ChargerStat.CHECKING;
+    private static final Double 충전기_가격 = 100.0;
 
     private static final Charger charger1, charger2;
     private static final Station station1, station2;
@@ -61,6 +62,7 @@ public class ChargerGenerator {
                 .chargerType(충전기_충전_타입)
                 .chargerStat(충전기_상태)
                 .output(충전기_출력)
+                .price(충전기_가격)
                 .build();
         charger2 = Charger.builder()
                 .station(station2)
@@ -68,6 +70,7 @@ public class ChargerGenerator {
                 .chargerType(충전기_충전_타입)
                 .chargerStat(충전기_상태)
                 .output(충전기_출력)
+                .price(충전기_가격)
                 .build();
         station1.addCharger(charger1);
         station2.addCharger(charger2);
