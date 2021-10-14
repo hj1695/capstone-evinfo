@@ -16,6 +16,7 @@ public class StationResponseDto {
     private final Double latitude;
     private final Double longitude;
     private final String callNumber;
+    private final String businessName;
     private final Double distance;
     private final List<ChargerResponseDto> chargers;
 
@@ -28,6 +29,7 @@ public class StationResponseDto {
         this.latitude = station.getLatitude();
         this.longitude = station.getLongitude();
         this.callNumber = station.getCallNumber();
+        this.businessName = station.getBusinessName();
         this.distance = distance;
         this.chargers = station.getChargers()
                 .stream()

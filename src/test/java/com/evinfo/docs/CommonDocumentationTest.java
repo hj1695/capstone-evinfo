@@ -91,6 +91,10 @@ class CommonDocumentationTest extends Documentation {
                         customResponseFields("custom-response", beneathPath("chargerStats").withSubsectionId("chargerStats"),
                                 attributes(key("title").value("충전기 상태")),
                                 enumConvertFieldDescriptor(docs.getChargerStats())
+                        ),
+                        customResponseFields("custom-response", beneathPath("chargerPrices").withSubsectionId("chargerPrices"),
+                                attributes(key("title").value("충전기 운영사별 가격")),
+                                enumConvertFieldDescriptor(docs.getChargerPrices())
                         )
                 ));
     }

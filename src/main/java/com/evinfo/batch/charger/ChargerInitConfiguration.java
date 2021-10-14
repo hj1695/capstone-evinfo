@@ -101,8 +101,8 @@ public class ChargerInitConfiguration {
         JdbcBatchItemWriter<Station> itemWriter = new JdbcBatchItemWriterBuilder<Station>()
                 .dataSource(dataSource)
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("replace into station(station_id, station_name, address, location, latitude, longitude, call_number, use_time) " +
-                        "values(:stationId, :stationName, :address, :location, :latitude, :longitude, :callNumber, :useTime) ")
+                .sql("replace into station(station_id, station_name, address, location, latitude, longitude, call_number, use_time, business_name) " +
+                        "values(:stationId, :stationName, :address, :location, :latitude, :longitude, :callNumber, :useTime, :businessName) ")
                 .build();
 
         itemWriter.afterPropertiesSet();
@@ -124,8 +124,8 @@ public class ChargerInitConfiguration {
         JdbcBatchItemWriter<ChargerCreateRequestDto> itemWriter = new JdbcBatchItemWriterBuilder<ChargerCreateRequestDto>()
                 .dataSource(dataSource)
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("replace into charger(charger_id, station_id, charger_stat, charger_type) " +
-                        "values(:chargerId, :stationId, :chargerStat, :chargerType) ")
+                .sql("replace into charger(charger_id, station_id, charger_stat, charger_type, output, price) " +
+                        "values(:chargerId, :stationId, :chargerStat, :chargerType, :output, :price) ")
                 .build();
 
         itemWriter.afterPropertiesSet();

@@ -4,6 +4,7 @@ import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.ChargerType;
 import com.evinfo.domain.charger.Station;
+import com.evinfo.domain.charger.utils.ChargerPrice;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 @Getter
 @Builder
@@ -50,10 +52,15 @@ public class ChargerClientResponseDto {
     private String delDetail;
 
     public Charger getCharger() {
+        if (Objects.isNull(this.output)) {
+            this.output = 1L;
+        }
         return Charger.builder()
                 .chargerId(this.chgerId)
                 .chargerType(ChargerType.valueOf(this.chgerType))
                 .chargerStat(ChargerStat.valueOf(this.stat))
+                .output(this.output)
+                .price(ChargerPrice.getPrice(this.bnm, this.output))
                 .build();
     }
 
@@ -67,6 +74,7 @@ public class ChargerClientResponseDto {
                 .latitude(this.lat)
                 .longitude(this.lng)
                 .callNumber(this.busiCall)
+                .businessName(this.bnm)
                 .build();
     }
 }
