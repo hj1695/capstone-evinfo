@@ -67,6 +67,7 @@ public class ChargerClientResponseDto {
                 .latitude(this.lat)
                 .longitude(this.lng)
                 .callNumber(this.busiCall)
+                .businessName(bnm)
                 .build();
     }
 }
