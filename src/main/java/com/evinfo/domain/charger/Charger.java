@@ -37,13 +37,18 @@ public class Charger {
     @Min(value = 0)
     private Long output;
 
+    @NotNull
+    @Min(value = 0)
+    private Double price;
+
     @Builder
-    public Charger(Station station, String chargerId, ChargerType chargerType, ChargerStat chargerStat, Long output) {
+    public Charger(Station station, String chargerId, ChargerType chargerType, ChargerStat chargerStat, Long output, Double price) {
         this.station = station;
         this.chargerId = chargerId;
         this.chargerType = chargerType;
         this.chargerStat = chargerStat;
         this.output = output;
+        this.price = price;
     }
 
     public void updateChargerStat(final ChargerStat chargerStat) {

@@ -10,6 +10,7 @@ public class ChargerCreateRequestDto {
     private final String chargerStat;
     private final String chargerType;
     private final Long output;
+    private final Double price;
 
     public ChargerCreateRequestDto(Charger charger) {
         this.stationId = charger.getStation().getStationId();
@@ -17,5 +18,6 @@ public class ChargerCreateRequestDto {
         this.chargerStat = charger.getChargerStat().name();
         this.chargerType = charger.getChargerType().name();
         this.output = charger.getOutput();
+        this.price = charger.getPrice();
     }
 }

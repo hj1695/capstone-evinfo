@@ -4,6 +4,7 @@ import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.ChargerType;
 import com.evinfo.domain.charger.Station;
+import com.evinfo.domain.charger.utils.ChargerPrice;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -59,6 +60,7 @@ public class ChargerClientResponseDto {
                 .chargerType(ChargerType.valueOf(this.chgerType))
                 .chargerStat(ChargerStat.valueOf(this.stat))
                 .output(this.output)
+                .price(ChargerPrice.getPrice(this.bnm, this.output))
                 .build();
     }
 
