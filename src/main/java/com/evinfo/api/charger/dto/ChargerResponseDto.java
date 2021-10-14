@@ -12,6 +12,7 @@ public class ChargerResponseDto {
     private final Boolean isAC3;
     private final Boolean isACSlow;
     private final ChargerStat chargerStat;
+    private final Long output;
 
     public ChargerResponseDto(final Charger charger) {
         this.chargerId = charger.getChargerId();
@@ -20,5 +21,6 @@ public class ChargerResponseDto {
         this.isDCDemo = charger.getChargerType().isDCDemo();
         this.isAC3 = charger.getChargerType().isAC3();
         this.isACSlow = charger.getChargerType().isACSlow();
+        this.output = charger.getOutput();
     }
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -32,12 +33,17 @@ public class Charger {
     @NotNull
     private ChargerStat chargerStat;
 
+    @NotNull
+    @Min(value = 0)
+    private Long output;
+
     @Builder
-    public Charger(Station station, String chargerId, ChargerType chargerType, ChargerStat chargerStat) {
+    public Charger(Station station, String chargerId, ChargerType chargerType, ChargerStat chargerStat, Long output) {
         this.station = station;
         this.chargerId = chargerId;
         this.chargerType = chargerType;
         this.chargerStat = chargerStat;
+        this.output = output;
     }
 
     public void updateChargerStat(final ChargerStat chargerStat) {
