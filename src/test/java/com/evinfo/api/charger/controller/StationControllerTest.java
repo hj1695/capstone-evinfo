@@ -102,6 +102,7 @@ class StationControllerTest extends Documentation {
                                 fieldWithPath("[].distance").type(JsonFieldType.NUMBER).description("현재 위치 기준 충전소와의 거리(단위: km)"),
                                 fieldWithPath("[].chargers").type(JsonFieldType.ARRAY).description("충전소의 충전기 목록"),
                                 fieldWithPath("[].chargers[].chargerId").type(JsonFieldType.STRING).description("충전소에 속하는 충전기의 ID"),
+                                fieldWithPath("[].chargers[].output").type(JsonFieldType.NUMBER).description("충전소에 속하는 충전기의 출력 kw값"),
                                 fieldWithPath("[].chargers[].isDCCombo").type(JsonFieldType.BOOLEAN).description("충전소에 속하는 충전기의 타입이 DC 콤보(급속)에 속하는지 여부"),
                                 fieldWithPath("[].chargers[].isDCDemo").type(JsonFieldType.BOOLEAN).description("충전소에 속하는 충전기의 타입이 DC 데모(급속)에 속하는지 여부"),
                                 fieldWithPath("[].chargers[].isAC3").type(JsonFieldType.BOOLEAN).description("충전소에 속하는 충전기의 타입이 AC3 상(급속)에 속하는지 여부"),
