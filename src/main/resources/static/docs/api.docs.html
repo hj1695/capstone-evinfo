@@ -2225,7 +2225,7 @@
           <thead>
           <tr>
             <th class="tableblock halign-left valign-top">코드</th>
-            <th class="tableblock halign-left valign-top">코드명</th>
+            <th class="tableblock halign-left valign-top">설명</th>
           </tr>
           </thead>
           <tbody>
@@ -2278,7 +2278,7 @@
           <thead>
           <tr>
             <th class="tableblock halign-left valign-top">코드</th>
-            <th class="tableblock halign-left valign-top">코드명</th>
+            <th class="tableblock halign-left valign-top">설명</th>
           </tr>
           </thead>
           <tbody>
@@ -2305,6 +2305,73 @@
           <tr>
             <td class="tableblock halign-left valign-top"><p class="tableblock"><code>UNKNOWN</code></p></td>
             <td class="tableblock halign-left valign-top"><p class="tableblock">상태 미확인</p></td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="paragraph">
+          <p>충전기 운영사별 가격</p>
+        </div>
+        <table class="tableblock frame-all grid-all stretch">
+          <colgroup>
+            <col style="width: 50%;">
+            <col style="width: 50%;">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="tableblock halign-left valign-top">코드</th>
+            <th class="tableblock halign-left valign-top">설명</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>환경부</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 292.9
+              100kw 이상: 309.1</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>한국전력공사</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 292.9
+              100kw 이상: 309.1</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>GS칼텍스</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 279.0
+              100kw 이상: 279.0</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>제주전기자동차서비스</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 280.0
+              100kw 이상: 280.0</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>한국전기차충전서비스</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 255.7
+              100kw 이상: 290.0</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>에스트레픽</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 292.9
+              100kw 이상: 309.1</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>현대오일뱅크</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 292.9
+              100kw 이상: 309.1</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>SK에너지</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 255.0
+              100kw 이상: 255.0</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>차지비</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 279.0
+              100kw 이상: 279.0</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><code>기타</code></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">100kw 이하: 292.9
+              100kw 이상: 309.1</p></td>
           </tr>
           </tbody>
         </table>
@@ -2335,7 +2402,7 @@ Host: localhost</code></pre>
             <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1364
+Content-Length: 1536
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -2346,6 +2413,7 @@ Content-Length: 1364
   "latitude" : 1.0,
   "longitude" : 10.0,
   "callNumber" : "010-1234-5678",
+  "businessName" : "운영 기관명 예시",
   "distance" : 10.0,
   "chargers" : [ {
     "chargerId" : "충전기 충전기 ID 1",
@@ -2353,14 +2421,16 @@ Content-Length: 1364
     "isDCDemo" : true,
     "isAC3" : false,
     "isACSlow" : false,
-    "chargerStat" : "CHECKING"
+    "chargerStat" : "CHECKING",
+    "output" : 100
   }, {
     "chargerId" : "충전기 충전기 ID 1",
     "isDCCombo" : false,
     "isDCDemo" : true,
     "isAC3" : false,
     "isACSlow" : false,
-    "chargerStat" : "CHECKING"
+    "chargerStat" : "CHECKING",
+    "output" : 100
   } ]
 }, {
   "stationName" : "충전기 충전소 이름 2",
@@ -2371,6 +2441,7 @@ Content-Length: 1364
   "latitude" : 2.0,
   "longitude" : 20.0,
   "callNumber" : "010-1234-5678",
+  "businessName" : "운영 기관명 예시",
   "distance" : 10.0,
   "chargers" : [ {
     "chargerId" : "충전기 충전기 ID 2",
@@ -2378,14 +2449,16 @@ Content-Length: 1364
     "isDCDemo" : true,
     "isAC3" : false,
     "isACSlow" : false,
-    "chargerStat" : "CHECKING"
+    "chargerStat" : "CHECKING",
+    "output" : 100
   }, {
     "chargerId" : "충전기 충전기 ID 2",
     "isDCCombo" : false,
     "isDCDemo" : true,
     "isAC3" : false,
     "isACSlow" : false,
-    "chargerStat" : "CHECKING"
+    "chargerStat" : "CHECKING",
+    "output" : 100
   } ]
 } ]</code></pre>
             </div>
@@ -2477,14 +2550,19 @@ Content-Length: 1364
               <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 위도</p></td>
             </tr>
             <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].longitude</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 경도</p></td>
+            </tr>
+            <tr>
               <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].callNumber</code></p></td>
               <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
               <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 전화번호</p></td>
             </tr>
             <tr>
-              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].longitude</code></p></td>
-              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-              <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 경도</p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].businessName</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 운영기관 이름</p></td>
             </tr>
             <tr>
               <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].distance</code></p></td>
@@ -2501,6 +2579,12 @@ Content-Length: 1364
               </p></td>
               <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
               <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 ID</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].output</code></p>
+              </td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 출력 kw값</p></td>
             </tr>
             <tr>
               <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].isDCCombo</code>
@@ -2545,7 +2629,7 @@ Content-Length: 1364
 </div>
 <div id="footer">
   <div id="footer-text">
-    Last updated 2021-10-08 13:41:57 +0900
+    Last updated 2021-10-14 19:35:09 +0900
   </div>
 </div>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css" rel="stylesheet">
