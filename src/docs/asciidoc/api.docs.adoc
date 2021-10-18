@@ -42,6 +42,7 @@ include::{snippets}/common/response-fields.adoc[]
 
 include::{snippets}/common/custom-response-fields-errorCodes.adoc[]
 include::{snippets}/common/custom-response-fields-chargerStats.adoc[]
+include::{snippets}/common/custom-response-fields-chargerPrices.adoc[]
 
 [[resources]]
 = API

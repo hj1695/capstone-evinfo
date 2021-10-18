@@ -1,5 +1,6 @@
 package com.evinfo.api.charger.dto;
 
+import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.Station;
 import lombok.Getter;
 
@@ -16,7 +17,9 @@ public class StationResponseDto {
     private final Double latitude;
     private final Double longitude;
     private final String callNumber;
+    private final String businessName;
     private final Double distance;
+    private final Integer enableChargers;
     private final List<ChargerResponseDto> chargers;
 
     public StationResponseDto(final Station station, final Double distance) {
@@ -28,10 +31,15 @@ public class StationResponseDto {
         this.latitude = station.getLatitude();
         this.longitude = station.getLongitude();
         this.callNumber = station.getCallNumber();
+        this.businessName = station.getBusinessName();
         this.distance = distance;
         this.chargers = station.getChargers()
                 .stream()
                 .map(ChargerResponseDto::new)
                 .collect(Collectors.toList());
+        this.enableChargers = (int) station.getChargers()
+                .stream()
+                .filter(charger -> charger.getChargerStat().equals(ChargerStat.WAITING))
+                .count();
     }
 }

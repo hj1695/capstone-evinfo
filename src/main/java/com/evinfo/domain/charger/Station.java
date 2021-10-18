@@ -44,11 +44,14 @@ public class Station {
     @NotNull
     private String useTime;
 
+    @NotBlank
+    private String businessName;
+
     @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
     private List<Charger> chargers;
 
     @Builder
-    public Station(String stationId, String stationName, String address, String location, Double latitude, Double longitude, String callNumber, String useTime) {
+    public Station(String stationId, String stationName, String address, String location, Double latitude, Double longitude, String callNumber, String useTime, String businessName) {
         this.stationId = stationId;
         this.stationName = stationName;
         this.address = address;
@@ -57,6 +60,7 @@ public class Station {
         this.longitude = longitude;
         this.callNumber = callNumber;
         this.useTime = useTime;
+        this.businessName = businessName;
         this.chargers = new ArrayList<>();
     }
 
