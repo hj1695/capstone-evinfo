@@ -100,6 +100,7 @@ class StationControllerTest extends Documentation {
                                 fieldWithPath("[].callNumber").type(JsonFieldType.STRING).description("충전소의 전화번호"),
                                 fieldWithPath("[].businessName").type(JsonFieldType.STRING).description("충전소의 운영기관 이름"),
                                 fieldWithPath("[].distance").type(JsonFieldType.NUMBER).description("현재 위치 기준 충전소와의 거리(단위: km)"),
+                                fieldWithPath("[].enableChargers").type(JsonFieldType.NUMBER).description("충전소에 사용 가능한 대기 충전기의 개수"),
                                 fieldWithPath("[].chargers").type(JsonFieldType.ARRAY).description("충전소의 충전기 목록"),
                                 fieldWithPath("[].chargers[].chargerId").type(JsonFieldType.STRING).description("충전소에 속하는 충전기의 ID"),
                                 fieldWithPath("[].chargers[].output").type(JsonFieldType.NUMBER).description("충전소에 속하는 충전기의 출력 kw값"),
