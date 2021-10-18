@@ -723,7 +723,7 @@ Host: localhost</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1620
+Content-Length: 1668
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -736,6 +736,7 @@ Content-Length: 1620
   "callNumber" : "010-1234-5678",
   "businessName" : "운영 기관명 예시",
   "distance" : 10.0,
+  "enableChargers" : 0,
   "chargers" : [ {
     "chargerId" : "충전기 충전기 ID 1",
     "isDCCombo" : false,
@@ -766,6 +767,7 @@ Content-Length: 1620
   "callNumber" : "010-1234-5678",
   "businessName" : "운영 기관명 예시",
   "distance" : 10.0,
+  "enableChargers" : 0,
   "chargers" : [ {
     "chargerId" : "충전기 충전기 ID 2",
     "isDCCombo" : false,
@@ -880,24 +882,29 @@ Content-Length: 1620
 <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 전화번호</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].businessName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 운영기관 이름</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].businessName</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 운영기관 이름</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].distance</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">현재 위치 기준 충전소와의 거리(단위: km)</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].distance</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">현재 위치 기준 충전소와의 거리(단위: km)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 충전기 목록</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].enableChargers</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 사용 가능한 대기 충전기의 개수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].chargerId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 ID</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 충전기 목록</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].chargerId</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 ID</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].output</code></p></td>
@@ -943,7 +950,7 @@ Content-Length: 1620
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-14 19:35:09 +0900
+  Last updated 2021-10-14 20:27:44 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
