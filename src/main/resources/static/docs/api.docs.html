@@ -723,7 +723,7 @@ Host: localhost</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1668
+Content-Length: 1760
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -737,6 +737,8 @@ Content-Length: 1668
   "businessName" : "운영 기관명 예시",
   "distance" : 10.0,
   "enableChargers" : 0,
+  "isLimit" : true,
+  "isParkingFree" : true,
   "chargers" : [ {
     "chargerId" : "충전기 충전기 ID 1",
     "isDCCombo" : false,
@@ -768,6 +770,8 @@ Content-Length: 1668
   "businessName" : "운영 기관명 예시",
   "distance" : 10.0,
   "enableChargers" : 0,
+  "isLimit" : true,
+  "isParkingFree" : true,
   "chargers" : [ {
     "chargerId" : "충전기 충전기 ID 2",
     "isDCCombo" : false,
@@ -877,14 +881,24 @@ Content-Length: 1668
 <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 경도</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].callNumber</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 전화번호</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].callNumber</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 전화번호</p></td>
 </tr>
 <tr>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].businessName</code></p></td>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
   <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 운영기관 이름</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].isLimit</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 외부인 이용가능 여부</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].isParkingFree</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 주차요금 무료 여부</p></td>
 </tr>
 <tr>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].distance</code></p></td>
@@ -950,7 +964,7 @@ Content-Length: 1668
 </div>
 <div id="footer">
 <div id="footer-text">
-  Last updated 2021-10-14 20:27:44 +0900
+  Last updated 2021-10-18 10:38:13 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
