@@ -75,6 +75,15 @@ public class ChargerClientResponseDto {
                 .longitude(this.lng)
                 .callNumber(this.busiCall)
                 .businessName(this.bnm)
+                .isLimit(exchangeBoolean(this.limitYn))
+                .isParkingFree(exchangeBoolean(this.parkingFree))
                 .build();
+    }
+
+    private Boolean exchangeBoolean(String value) {
+        if (value.equals("Y")) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 }

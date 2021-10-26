@@ -101,8 +101,8 @@ public class ChargerInitConfiguration {
         JdbcBatchItemWriter<Station> itemWriter = new JdbcBatchItemWriterBuilder<Station>()
                 .dataSource(dataSource)
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("replace into station(station_id, station_name, address, location, latitude, longitude, call_number, use_time, business_name) " +
-                        "values(:stationId, :stationName, :address, :location, :latitude, :longitude, :callNumber, :useTime, :businessName) ")
+                .sql("replace into station(station_id, station_name, address, location, latitude, longitude, call_number, use_time, business_name, is_limit, is_parking_free) " +
+                        "values(:stationId, :stationName, :address, :location, :latitude, :longitude, :callNumber, :useTime, :businessName, :isLimit, :isParkingFree) ")
                 .build();
 
         itemWriter.afterPropertiesSet();

@@ -44,6 +44,8 @@ public class ChargerGenerator {
                 .longitude(충전소_경도_1)
                 .callNumber(충전소_전화번호)
                 .businessName(충전소_운영기관명)
+                .isLimit(true)
+                .isParkingFree(true)
                 .build();
         station2 = Station.builder()
                 .stationName(충전소_이름_2)
@@ -55,6 +57,8 @@ public class ChargerGenerator {
                 .longitude(충전소_경도_2)
                 .callNumber(충전소_전화번호)
                 .businessName(충전소_운영기관명)
+                .isLimit(true)
+                .isParkingFree(true)
                 .build();
         charger1 = Charger.builder()
                 .station(station1)
@@ -104,6 +108,8 @@ public class ChargerGenerator {
                         .stat(charger1.getChargerStat().getKey())
                         .busiNm(station1.getBusinessName())
                         .output(charger1.getOutput())
+                        .parkingFree("Y")
+                        .limitYn("Y")
                         .build(),
                 ChargerClientResponseDto.builder()
                         .statNm(station2.getStationName())
@@ -119,6 +125,8 @@ public class ChargerGenerator {
                         .stat(charger2.getChargerStat().getKey())
                         .busiNm(station2.getBusinessName())
                         .output(charger2.getOutput())
+                        .parkingFree("Y")
+                        .limitYn("Y")
                         .build());
     }
 }

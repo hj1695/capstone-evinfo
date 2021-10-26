@@ -20,6 +20,8 @@ public class StationResponseDto {
     private final String businessName;
     private final Double distance;
     private final Integer enableChargers;
+    private final Boolean isLimit;
+    private final Boolean isParkingFree;
     private final List<ChargerResponseDto> chargers;
 
     public StationResponseDto(final Station station, final Double distance) {
@@ -32,6 +34,8 @@ public class StationResponseDto {
         this.longitude = station.getLongitude();
         this.callNumber = station.getCallNumber();
         this.businessName = station.getBusinessName();
+        this.isLimit = station.getIsLimit();
+        this.isParkingFree = station.getIsParkingFree();
         this.distance = distance;
         this.chargers = station.getChargers()
                 .stream()

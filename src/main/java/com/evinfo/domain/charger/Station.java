@@ -1,9 +1,6 @@
 package com.evinfo.domain.charger;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,6 +14,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Station {
     @Id
@@ -48,21 +47,11 @@ public class Station {
     private String businessName;
 
     @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
-    private List<Charger> chargers;
-
-    @Builder
-    public Station(String stationId, String stationName, String address, String location, Double latitude, Double longitude, String callNumber, String useTime, String businessName) {
-        this.stationId = stationId;
-        this.stationName = stationName;
-        this.address = address;
-        this.location = location;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.callNumber = callNumber;
-        this.useTime = useTime;
-        this.businessName = businessName;
-        this.chargers = new ArrayList<>();
-    }
+    private final List<Charger> chargers = new ArrayList<>();
+    @NotNull
+    private Boolean isLimit;
+    @NotNull
+    private Boolean isParkingFree;
 
     public void addCharger(final Charger charger) {
         this.chargers.add(charger);
