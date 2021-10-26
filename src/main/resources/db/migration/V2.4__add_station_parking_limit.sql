@@ -1,0 +1,4 @@
+ALTER TABLE station
+    ADD COLUMN is_limit BOOLEAN NOT NULL;
+ALTER TABLE station
+    ADD COLUMN is_parking_free BOOLEAN NOT NULL;
