@@ -1,18 +1,20 @@
 package com.evinfo.domain.charger;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import java.time.LocalDateTime;
 
 // TODO: 2021/09/09 추후 시간나면 validation + enum exception에 대한 도메인 테스트 구현
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @IdClass(ChargerCompositeId.class)
 public class Charger {
@@ -41,18 +43,24 @@ public class Charger {
     @Min(value = 0)
     private Double price;
 
-    @Builder
-    public Charger(Station station, String chargerId, ChargerType chargerType, ChargerStat chargerStat, Long output, Double price) {
-        this.station = station;
-        this.chargerId = chargerId;
-        this.chargerType = chargerType;
-        this.chargerStat = chargerStat;
-        this.output = output;
-        this.price = price;
-    }
+    @DateTimeFormat(pattern = "yyyyMMddHHmmss")
+    @PastOrPresent
+    private LocalDateTime lastChargeDateTime;
+
+    @DateTimeFormat(pattern = "yyyyMMddHHmmss")
+    @PastOrPresent
+    private LocalDateTime startChargeDateTime;
 
     public void updateChargerStat(final ChargerStat chargerStat) {
         this.chargerStat = chargerStat;
+    }
+
+    public void updateLastChargeDateTime(LocalDateTime lastChargeDateTime) {
+        this.lastChargeDateTime = lastChargeDateTime;
+    }
+
+    public void updateStartChargeDateTime(LocalDateTime startChargeDateTime) {
+        this.startChargeDateTime = startChargeDateTime;
     }
 
     public void updateStation(final Station station) {

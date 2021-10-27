@@ -4,6 +4,8 @@ import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class ChargerResponseDto {
     private final String chargerId;
@@ -14,6 +16,8 @@ public class ChargerResponseDto {
     private final ChargerStat chargerStat;
     private final Long output;
     private final Double price;
+    private final LocalDateTime lastChargeDateTime;
+    private final LocalDateTime startChargeDateTime;
 
     public ChargerResponseDto(final Charger charger) {
         this.chargerId = charger.getChargerId();
@@ -24,5 +28,7 @@ public class ChargerResponseDto {
         this.isACSlow = charger.getChargerType().isACSlow();
         this.output = charger.getOutput();
         this.price = charger.getPrice();
+        this.lastChargeDateTime = charger.getLastChargeDateTime();
+        this.startChargeDateTime = charger.getStartChargeDateTime();
     }
 }
