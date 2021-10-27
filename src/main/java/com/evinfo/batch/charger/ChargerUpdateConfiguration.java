@@ -65,10 +65,16 @@ public class ChargerUpdateConfiguration {
         return item -> {
             var charger = chargerRepository.findById(new ChargerCompositeId(item.getStationId(), item.getChargerId()))
                     .orElse(null);
-            if (Objects.isNull(charger) || charger.getChargerStat().equals(item.getChargerStat())) {
+            if (Objects.isNull(charger) ||
+                    (charger.getChargerStat().equals(item.getChargerStat())
+                            && charger.getStartChargeDateTime().equals(item.getStartChargeDateTime())
+                    )
+            ) {
                 return null;
             }
             charger.updateChargerStat(item.getChargerStat());
+            charger.updateStartChargeDateTime(item.getStartChargeDateTime());
+            charger.updateLastChargeDateTime(item.getLastChargeDateTime());
 
             return charger;
         };

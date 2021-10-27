@@ -111,7 +111,9 @@ class StationControllerTest extends Documentation {
                                 fieldWithPath("[].chargers[].isDCDemo").type(JsonFieldType.BOOLEAN).description("충전소에 속하는 충전기의 타입이 DC 데모(급속)에 속하는지 여부"),
                                 fieldWithPath("[].chargers[].isAC3").type(JsonFieldType.BOOLEAN).description("충전소에 속하는 충전기의 타입이 AC3 상(급속)에 속하는지 여부"),
                                 fieldWithPath("[].chargers[].isACSlow").type(JsonFieldType.BOOLEAN).description("충전소에 속하는 충전기의 타입이 AC 단상(5핀, 완속)에 속하는지 여부"),
-                                fieldWithPath("[].chargers[].chargerStat").type(JsonFieldType.STRING).description("충전소에 속하는 충전기의 현재 상태")
+                                fieldWithPath("[].chargers[].chargerStat").type(JsonFieldType.STRING).description("충전소에 속하는 충전기의 현재 상태"),
+                                fieldWithPath("[].chargers[].lastChargeDateTime").type(JsonFieldType.STRING).description("충전소에 속하는 충전기의 마지막 충전 종료시간. 오류시 2000-01-01 반환"),
+                                fieldWithPath("[].chargers[].startChargeDateTime").type(JsonFieldType.STRING).description("충전소에 속하는 충전기의 최근 충전 시작시간. 오류시 2000-01-01 반환")
                         )
                 ));
     }
