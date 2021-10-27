@@ -723,7 +723,7 @@ Host: localhost</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1760
+Content-Length: 2164
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -747,7 +747,9 @@ Content-Length: 1760
     "isACSlow" : false,
     "chargerStat" : "CHECKING",
     "output" : 100,
-    "price" : 100.0
+    "price" : 100.0,
+    "lastChargeDateTime" : "2010-01-01T12:00:00",
+    "startChargeDateTime" : "2010-01-01T12:00:00"
   }, {
     "chargerId" : "충전기 충전기 ID 1",
     "isDCCombo" : false,
@@ -756,7 +758,9 @@ Content-Length: 1760
     "isACSlow" : false,
     "chargerStat" : "CHECKING",
     "output" : 100,
-    "price" : 100.0
+    "price" : 100.0,
+    "lastChargeDateTime" : "2010-01-01T12:00:00",
+    "startChargeDateTime" : "2010-01-01T12:00:00"
   } ]
 }, {
   "stationName" : "충전기 충전소 이름 2",
@@ -780,7 +784,9 @@ Content-Length: 1760
     "isACSlow" : false,
     "chargerStat" : "CHECKING",
     "output" : 100,
-    "price" : 100.0
+    "price" : 100.0,
+    "lastChargeDateTime" : "2010-01-01T12:00:00",
+    "startChargeDateTime" : "2010-01-01T12:00:00"
   }, {
     "chargerId" : "충전기 충전기 ID 2",
     "isDCCombo" : false,
@@ -789,7 +795,9 @@ Content-Length: 1760
     "isACSlow" : false,
     "chargerStat" : "CHECKING",
     "output" : 100,
-    "price" : 100.0
+    "price" : 100.0,
+    "lastChargeDateTime" : "2010-01-01T12:00:00",
+    "startChargeDateTime" : "2010-01-01T12:00:00"
   } ]
 } ]</code></pre>
 </div>
@@ -946,14 +954,28 @@ Content-Length: 1760
 <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 타입이 AC3 상(급속)에 속하는지 여부</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].isACSlow</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 타입이 AC 단상(5핀, 완속)에 속하는지 여부</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].isACSlow</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 타입이 AC 단상(5핀, 완속)에 속하는지 여부</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].chargerStat</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 현재 상태</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].chargerStat</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 현재 상태</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].lastChargeDateTime</code></p>
+  </td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 마지막 충전 종료시간. 오류시 2000-01-01 반환</p>
+  </td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].startChargeDateTime</code></p>
+  </td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 최근 충전 시작시간. 오류시 2000-01-01 반환</p>
+  </td>
 </tr>
 </tbody>
 </table>
