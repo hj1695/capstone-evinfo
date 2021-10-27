@@ -5,6 +5,7 @@ import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.ChargerType;
 import com.evinfo.domain.charger.Station;
 import com.evinfo.domain.charger.utils.ChargerPrice;
+import com.evinfo.global.utils.DateTimeTranslator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -61,6 +62,8 @@ public class ChargerClientResponseDto {
                 .chargerStat(ChargerStat.valueOf(this.stat))
                 .output(this.output)
                 .price(ChargerPrice.getPrice(this.bnm, this.output))
+                .lastChargeDateTime(DateTimeTranslator.exchangeLocalDateTime(this.lastTedt))
+                .startChargeDateTime(DateTimeTranslator.exchangeLocalDateTime(this.statUpdDt))
                 .build();
     }
 
