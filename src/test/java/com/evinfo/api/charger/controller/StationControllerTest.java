@@ -19,6 +19,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +44,7 @@ class StationControllerTest extends Documentation {
     private static final String 사용자_위도 = "11.22";
     private static final String 사용자_경도 = "22.33";
     private static final String 사용자_요구_데이터_크기 = "10";
+    private static final List<String> 사용자_필터링_타입 = Arrays.asList("1", "2", "3");
 
     @MockBean
     private StationService stationService;
@@ -68,6 +70,7 @@ class StationControllerTest extends Documentation {
         params.put("latitude", Collections.singletonList(사용자_위도));
         params.put("longitude", Collections.singletonList(사용자_경도));
         params.put("size", Collections.singletonList(사용자_요구_데이터_크기));
+        params.put("chargerTypes", 사용자_필터링_타입);
         when(stationService.getStations(any())).thenReturn(stationResponses);
 
         this.mockMvc.perform(get(API + "/stations")
@@ -86,7 +89,8 @@ class StationControllerTest extends Documentation {
                         requestParameters(
                                 parameterWithName("latitude").description("사용자의 위도 값"),
                                 parameterWithName("longitude").description("사용자의 경도 값"),
-                                parameterWithName("size").description("반환받고자 하는 사용자 주변 충전소 개수. 최대 1000개로 제한")
+                                parameterWithName("size").description("반환받고자 하는 사용자 주변 충전소 개수. 최대 1000개로 제한"),
+                                parameterWithName("chargerTypes").description("반환받고자 하는 정수형의 충전기 타입 ID 목록")
                         ),
                         responseFields(
                                 fieldWithPath("[]").type(JsonFieldType.ARRAY).description("전체 충전소의 목록"),
@@ -102,6 +106,7 @@ class StationControllerTest extends Documentation {
                                 fieldWithPath("[].isLimit").type(JsonFieldType.BOOLEAN).description("충전소의 외부인 이용가능 여부"),
                                 fieldWithPath("[].isParkingFree").type(JsonFieldType.BOOLEAN).description("충전소의 주차요금 무료 여부"),
                                 fieldWithPath("[].distance").type(JsonFieldType.NUMBER).description("현재 위치 기준 충전소와의 거리(단위: km)"),
+                                fieldWithPath("[].chargerTypes").type(JsonFieldType.ARRAY).description("충전소에 사용 가능한 충전기 타입의 ID 목록"),
                                 fieldWithPath("[].enableChargers").type(JsonFieldType.NUMBER).description("충전소에 사용 가능한 대기 충전기의 개수"),
                                 fieldWithPath("[].chargers").type(JsonFieldType.ARRAY).description("충전소의 충전기 목록"),
                                 fieldWithPath("[].chargers[].chargerId").type(JsonFieldType.STRING).description("충전소에 속하는 충전기의 ID"),

@@ -711,7 +711,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h4 id="resources-stations-gets_http_request"><a class="link" href="#resources-stations-gets_http_request">Example Request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/stations?latitude=11.22&amp;longitude=22.33&amp;size=10 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/stations?latitude=11.22&amp;longitude=22.33&amp;size=10&amp;chargerTypes=1&amp;chargerTypes=2&amp;chargerTypes=3 HTTP/1.1
 Accept: application/json
 Host: localhost</code></pre>
 </div>
@@ -723,7 +723,7 @@ Host: localhost</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 2164
+Content-Length: 1578
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -739,18 +739,8 @@ Content-Length: 2164
   "enableChargers" : 0,
   "isLimit" : true,
   "isParkingFree" : true,
+  "chargerTypes" : [ 1 ],
   "chargers" : [ {
-    "chargerId" : "충전기 충전기 ID 1",
-    "isDCCombo" : false,
-    "isDCDemo" : true,
-    "isAC3" : false,
-    "isACSlow" : false,
-    "chargerStat" : "CHECKING",
-    "output" : 100,
-    "price" : 100.0,
-    "lastChargeDateTime" : "2010-01-01T12:00:00",
-    "startChargeDateTime" : "2010-01-01T12:00:00"
-  }, {
     "chargerId" : "충전기 충전기 ID 1",
     "isDCCombo" : false,
     "isDCDemo" : true,
@@ -776,18 +766,8 @@ Content-Length: 2164
   "enableChargers" : 0,
   "isLimit" : true,
   "isParkingFree" : true,
+  "chargerTypes" : [ 1 ],
   "chargers" : [ {
-    "chargerId" : "충전기 충전기 ID 2",
-    "isDCCombo" : false,
-    "isDCDemo" : true,
-    "isAC3" : false,
-    "isACSlow" : false,
-    "chargerStat" : "CHECKING",
-    "output" : 100,
-    "price" : 100.0,
-    "lastChargeDateTime" : "2010-01-01T12:00:00",
-    "startChargeDateTime" : "2010-01-01T12:00:00"
-  }, {
     "chargerId" : "충전기 충전기 ID 2",
     "isDCCombo" : false,
     "isDCDemo" : true,
@@ -818,16 +798,20 @@ Content-Length: 2164
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>latitude</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 위도 값</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>latitude</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 위도 값</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>longitude</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 경도 값</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>longitude</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 경도 값</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">반환받고자 하는 사용자 주변 충전소 개수. 최대 1000개로 제한</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">반환받고자 하는 사용자 주변 충전소 개수. 최대 1000개로 제한</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>chargerTypes</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">반환받고자 하는 정수형의 충전기 타입 ID 목록</p></td>
 </tr>
 </tbody>
 </table>
@@ -912,6 +896,11 @@ Content-Length: 2164
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].distance</code></p></td>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
   <td class="tableblock halign-left valign-top"><p class="tableblock">현재 위치 기준 충전소와의 거리(단위: km)</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargerTypes</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 사용 가능한 충전기 타입의 ID 목록</p></td>
 </tr>
 <tr>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].enableChargers</code></p></td>

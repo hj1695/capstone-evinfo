@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,17 +22,15 @@ public class StationService {
 
     @Transactional(readOnly = true)
     public List<StationResponseDto> getStations(StationRequestDto request) {
-        List<StationResponseDto> responses = stationRepository.findAllByPosition(
-                request.getLatitude(),
-                request.getLongitude(),
-                request.getSize())
+        var chargerTypes = request.getChargerTypes();
+        List<StationResponseDto> responses = stationRepository.findAllJoinFetch()
                 .stream()
-                .map(station -> {
-                    Double distance = calculateDistance(station, request);
-
-                    return new StationResponseDto(station, distance);
-                })
+                .parallel()
+                .map(station -> new StationResponseDto(station, calculateDistance(station, request)))
+                .filter(station -> chargerTypes.containsAll(station.getChargerTypes()))
+                .sorted(Comparator.comparing(StationResponseDto::getDistance))
                 .collect(Collectors.toList());
+
         if (request.getSize() > responses.size())
             return responses;
         return responses.subList(0, request.getSize().intValue());
