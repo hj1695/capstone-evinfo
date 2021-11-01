@@ -1,5 +1,6 @@
 package com.evinfo.utils;
 
+import com.evinfo.api.charger.dto.ChargerTypeResponseDto;
 import com.evinfo.api.charger.dto.client.ChargerClientResponseDto;
 import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChargerGenerator {
     private static final String 충전소_이름_1 = "충전기 충전소 이름 1";
@@ -141,5 +143,11 @@ public class ChargerGenerator {
                         .lastTedt(충전기_마지막_충전시간)
                         .statUpdDt(충전기_충전_시작시간)
                         .build());
+    }
+
+    public static List<ChargerTypeResponseDto> getChargerTypeResponses() {
+        return Arrays.stream(ChargerType.values())
+                .map(ChargerTypeResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
