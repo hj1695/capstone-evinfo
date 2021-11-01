@@ -55,3 +55,10 @@ include::{snippets}/common/custom-response-fields-chargerPrices.adoc[]
 
 operation::stations/gets[snippets='http-request,http-response,request-parameters,response-fields']
 
+[[resources-chargers]]
+== 충전기
+
+[[resources-chargers-types]]
+=== 충전소 타입 조회
+
+operation::chargers/types[snippets='http-request,http-response,response-fields']

@@ -1,6 +1,8 @@
 package com.evinfo.api.charger.dto;
 
+import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
+import com.evinfo.domain.charger.ChargerType;
 import com.evinfo.domain.charger.Station;
 import lombok.Getter;
 
@@ -20,6 +22,9 @@ public class StationResponseDto {
     private final String businessName;
     private final Double distance;
     private final Integer enableChargers;
+    private final Boolean isLimit;
+    private final Boolean isParkingFree;
+    private final List<Long> chargerTypes;
     private final List<ChargerResponseDto> chargers;
 
     public StationResponseDto(final Station station, final Double distance) {
@@ -32,10 +37,18 @@ public class StationResponseDto {
         this.longitude = station.getLongitude();
         this.callNumber = station.getCallNumber();
         this.businessName = station.getBusinessName();
+        this.isLimit = station.getIsLimit();
+        this.isParkingFree = station.getIsParkingFree();
         this.distance = distance;
         this.chargers = station.getChargers()
                 .stream()
                 .map(ChargerResponseDto::new)
+                .collect(Collectors.toList());
+        this.chargerTypes = station.getChargers()
+                .stream()
+                .map(Charger::getChargerType)
+                .map(ChargerType::getKey)
+                .distinct()
                 .collect(Collectors.toList());
         this.enableChargers = (int) station.getChargers()
                 .stream()

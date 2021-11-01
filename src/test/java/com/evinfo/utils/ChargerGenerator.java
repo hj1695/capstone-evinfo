@@ -1,13 +1,17 @@
 package com.evinfo.utils;
 
+import com.evinfo.api.charger.dto.ChargerTypeResponseDto;
 import com.evinfo.api.charger.dto.client.ChargerClientResponseDto;
 import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.ChargerType;
 import com.evinfo.domain.charger.Station;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChargerGenerator {
     private static final String 충전소_이름_1 = "충전기 충전소 이름 1";
@@ -29,11 +33,14 @@ public class ChargerGenerator {
     private static final String 충전소_전화번호 = "010-1234-5678";
     private static final ChargerStat 충전기_상태 = ChargerStat.CHECKING;
     private static final Double 충전기_가격 = 100.0;
+    private static final String 충전기_마지막_충전시간 = "20100101120000";
+    private static final String 충전기_충전_시작시간 = "20100101120000";
 
     private static final Charger charger1, charger2;
     private static final Station station1, station2;
 
     static {
+        var formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         station1 = Station.builder()
                 .stationName(충전소_이름_1)
                 .stationId(충전소_ID_1)
@@ -44,6 +51,8 @@ public class ChargerGenerator {
                 .longitude(충전소_경도_1)
                 .callNumber(충전소_전화번호)
                 .businessName(충전소_운영기관명)
+                .isLimit(true)
+                .isParkingFree(true)
                 .build();
         station2 = Station.builder()
                 .stationName(충전소_이름_2)
@@ -55,6 +64,8 @@ public class ChargerGenerator {
                 .longitude(충전소_경도_2)
                 .callNumber(충전소_전화번호)
                 .businessName(충전소_운영기관명)
+                .isLimit(true)
+                .isParkingFree(true)
                 .build();
         charger1 = Charger.builder()
                 .station(station1)
@@ -63,6 +74,8 @@ public class ChargerGenerator {
                 .chargerStat(충전기_상태)
                 .output(충전기_출력)
                 .price(충전기_가격)
+                .lastChargeDateTime(LocalDateTime.parse(충전기_마지막_충전시간, formatter))
+                .startChargeDateTime(LocalDateTime.parse(충전기_충전_시작시간, formatter))
                 .build();
         charger2 = Charger.builder()
                 .station(station2)
@@ -71,6 +84,8 @@ public class ChargerGenerator {
                 .chargerStat(충전기_상태)
                 .output(충전기_출력)
                 .price(충전기_가격)
+                .lastChargeDateTime(LocalDateTime.parse(충전기_마지막_충전시간, formatter))
+                .startChargeDateTime(LocalDateTime.parse(충전기_충전_시작시간, formatter))
                 .build();
         station1.addCharger(charger1);
         station2.addCharger(charger2);
@@ -104,6 +119,10 @@ public class ChargerGenerator {
                         .stat(charger1.getChargerStat().getKey())
                         .busiNm(station1.getBusinessName())
                         .output(charger1.getOutput())
+                        .parkingFree("Y")
+                        .limitYn("Y")
+                        .lastTedt(충전기_마지막_충전시간)
+                        .statUpdDt(충전기_충전_시작시간)
                         .build(),
                 ChargerClientResponseDto.builder()
                         .statNm(station2.getStationName())
@@ -119,6 +138,16 @@ public class ChargerGenerator {
                         .stat(charger2.getChargerStat().getKey())
                         .busiNm(station2.getBusinessName())
                         .output(charger2.getOutput())
+                        .parkingFree("Y")
+                        .limitYn("Y")
+                        .lastTedt(충전기_마지막_충전시간)
+                        .statUpdDt(충전기_충전_시작시간)
                         .build());
+    }
+
+    public static List<ChargerTypeResponseDto> getChargerTypeResponses() {
+        return Arrays.stream(ChargerType.values())
+                .map(ChargerTypeResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
