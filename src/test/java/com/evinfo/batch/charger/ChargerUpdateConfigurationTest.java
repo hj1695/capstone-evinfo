@@ -42,7 +42,7 @@ class ChargerUpdateConfigurationTest {
     }
 
     // TODO: 2021/09/24 테스트가 수행 여부만 확인하고 종합적으로 바뀌는지 확인 못한다. 테스트추후 수정
-    @DisplayName("ChargerInitJob 실행시 올바르게 수행된다.")
+    @DisplayName("ChargerUpdateJob 실행시 올바르게 수행된다.")
     @Test
     void chargerInitJobTest() throws Exception {
         //given

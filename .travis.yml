@@ -1,0 +1,28 @@
+# 언어 및 jdk 버전
+language: java
+jdk:
+  - openjdk11
+
+# 암호화된 rest.yml을 복호화
+before_install:
+  - openssl aes-256-cbc -K $encrypted_4a7b01645f68_key -iv $encrypted_4a7b01645f68_iv -in ./src/main/resources/config/rest.yml.enc -out ./src/main/resources/config/rest.yml -d
+
+# 푸시할때 검사가 수행되는 브랜치
+branches:
+  only:
+    - master
+    - develop
+
+# Travis CI 서버의 HOME
+# 디렉토리에 의존성을 캐싱하여 반복작업 개선
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+script: "./gradlew clean build"
+
+# CI 실행 완료시 메일로 알람 전달
+notifications:
+  email:
+    recipients:
+      - 'dlrjsgml42@naver.com'
