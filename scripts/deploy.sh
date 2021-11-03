@@ -30,11 +30,10 @@ echo "> JAR Name: $JAR_NAME"
 echo "> $JAR_NAME 에 실행권한 추가"
 
 chmod +x $JAR_NAME
-chmod +x deploy.sh
 
 echo "> $JAR_NAME 실행"
 
 nohup java -jar -Xms512m -Xmx512m \
         -Dspring.config.location=classpath:/config/application.yml,classpath:/config/application-prod.yml \
         -Dspring.profiles.active=prod \
-        $REPOSITORY/$JAR_NAME 2>&1 &
+        $JAR_NAME 2>&1 &
