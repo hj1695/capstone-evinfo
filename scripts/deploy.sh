@@ -33,6 +33,7 @@ chmod +x $JAR_NAME
 
 echo "> Logback 실행을 위한 디렉토리 추가"
 
+chmod 777 .
 mkdir logs
 chmod 777 logs
 
