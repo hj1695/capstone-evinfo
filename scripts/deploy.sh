@@ -34,7 +34,7 @@ chmod +x $JAR_NAME
 echo "> Logback 실행을 위한 디렉토리 추가"
 
 sudo mkdir logs
-chmod +w logs
+sudo chmod +w logs
 
 echo "> $JAR_NAME 실행"
 
