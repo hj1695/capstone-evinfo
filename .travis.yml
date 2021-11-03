@@ -6,6 +6,8 @@ jdk:
 # 암호화된 rest.yml을 복호화
 before_install:
   - openssl aes-256-cbc -K $encrypted_4a7b01645f68_key -iv $encrypted_4a7b01645f68_iv -in ./src/main/resources/config/rest.yml.enc -out ./src/main/resources/config/rest.yml -d
+  - openssl aes-256-cbc -K $encrypted_c27f626e2aa6_key -iv $encrypted_c27f626e2aa6_iv -in ./src/main/resources/config/application-prod.yml.enc -out ./src/main/resources/config/application-prod.yml -d
+  - openssl aes-256-cbc -K $encrypted_a073a8182377_key -iv $encrypted_a073a8182377_iv -in ./src/main/resources/config/application-local.yml.enc -out ./src/main/resources/config/application-local.yml -d
 
 # 푸시할때 검사가 수행되는 브랜치
 branches:
@@ -20,6 +22,25 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 script: "./gradlew clean build"
+
+# 배포하기 전에 jar를 zip으로 압축 및 지정된 디렉토리에 저장
+before_deploy:
+  - zip -r capstone-evinfo
+  - mkdir -p deploy
+  - mv capstone-evinfo.zip deploy/capstone-evinfo.zip
+
+# 배포 작업. S3에 미리 암호화한 엑세스 키로 접근
+# Travis CI에 대한 IAM User가 부여되었으므로 접근 가능
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: capstone-build-deploy
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private # zip 파일 접근 권한은 private
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
 
 # CI 실행 완료시 메일로 알람 전달
 notifications:
