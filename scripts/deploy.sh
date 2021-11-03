@@ -36,4 +36,4 @@ echo "> $JAR_NAME 실행"
 nohup java -jar -Xms512m -Xmx512m \
     -Dspring.config.location=classpath:/config/application.yml,classpath:/config/application-prod.yml \
     -Dspring.profiles.active=prod \
-    $JAR_NAME 2>&1 &
+    $JAR_NAME >$REPOSITORY/nohup.out 2>&1 &
