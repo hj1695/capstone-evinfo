@@ -31,6 +31,9 @@ echo "> $JAR_NAME 에 실행권한 추가"
 
 chmod +x $JAR_NAME
 
+echo "> 유저권한 확인"
+users
+
 echo "> $JAR_NAME 실행"
 
 nohup java -jar -Xms512m -Xmx512m \
