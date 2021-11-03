@@ -37,13 +37,12 @@ dependencies {
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.batch:spring-batch-test'
 
-    compile 'org.mariadb.jdbc:mariadb-java-client'
-
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+    implementation("org.mariadb.jdbc:mariadb-java-client:2.7.1")
     testCompileOnly 'org.projectlombok:lombok:1.18.18'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.18'
 }
