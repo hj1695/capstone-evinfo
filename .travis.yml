@@ -25,7 +25,7 @@ script: "./gradlew clean build"
 
 # 배포하기 전에 jar를 zip으로 압축 및 지정된 디렉토리에 저장
 before_deploy:
-  - zip -r capstone-evinfo
+  - zip -r capstone-evinfo *
   - mkdir -p deploy
   - mv capstone-evinfo.zip deploy/capstone-evinfo.zip
 
