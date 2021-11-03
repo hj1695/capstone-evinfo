@@ -30,7 +30,6 @@ before_deploy:
   - cp appspec.yml before-deploy/
   - cp build/libs/*.jar before-deploy/
   - cd before-deploy && zip -r before-deploy * # before-deploy 로 이동후 전체 압축
-  - mkdir logs
   - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동후 deploy 디렉토리 생성
   - mv before-deploy/before-deploy.zip deploy/capstone-evinfo.zip # deploy 로 zip 파일 이동
 
