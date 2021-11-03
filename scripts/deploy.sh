@@ -31,12 +31,6 @@ echo "> $JAR_NAME 에 실행권한 추가"
 
 chmod +x $JAR_NAME
 
-echo "> Logback 실행을 위한 디렉토리 추가"
-
-sudo rmdir logs
-sudo mkdir logs
-sudo chmod +w logs
-
 echo "> $JAR_NAME 실행"
 
 nohup java -jar -Xms512m -Xmx512m \
