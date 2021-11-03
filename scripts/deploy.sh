@@ -31,9 +31,14 @@ echo "> $JAR_NAME 에 실행권한 추가"
 
 chmod +x $JAR_NAME
 
+echo "> Logback 실행을 위한 디렉토리 추가"
+
+mkdir logs
+chmod 777 logs
+
 echo "> $JAR_NAME 실행"
 
 nohup java -jar -Xms512m -Xmx512m \
-        -Dspring.config.location=classpath:/config/application.yml,classpath:/config/application-prod.yml \
-        -Dspring.profiles.active=prod \
-        $JAR_NAME 2>&1 &
+    -Dspring.config.location=classpath:/config/application.yml,classpath:/config/application-prod.yml \
+    -Dspring.profiles.active=prod \
+    $JAR_NAME 2>&1 &
