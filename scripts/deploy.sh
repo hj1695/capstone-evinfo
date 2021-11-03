@@ -30,9 +30,8 @@ echo "> JAR Name: $JAR_NAME"
 echo "> $JAR_NAME 에 실행권한 추가"
 
 chmod +x $JAR_NAME
-
-echo "> 유저권한 확인"
-users
+chmod +x deploy.sh
+chmod 777 -R logs
 
 echo "> $JAR_NAME 실행"
 
