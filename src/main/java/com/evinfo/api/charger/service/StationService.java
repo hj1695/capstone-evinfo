@@ -4,6 +4,8 @@ package com.evinfo.api.charger.service;
 import com.evinfo.api.charger.dto.StationRequestDto;
 import com.evinfo.api.charger.dto.StationResponseDto;
 import com.evinfo.api.charger.repository.StationRepository;
+import com.evinfo.domain.charger.Charger;
+import com.evinfo.domain.charger.ChargerType;
 import com.evinfo.domain.charger.Station;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,12 +24,19 @@ public class StationService {
 
     @Transactional(readOnly = true)
     public List<StationResponseDto> getStations(StationRequestDto request) {
-        var chargerTypes = request.getChargerTypes();
+        var chargerTypes = request.getChargerTypeIds();
         List<StationResponseDto> responses = stationRepository.findAllJoinFetch()
                 .stream()
                 .parallel()
+                .filter(station -> {
+                    List<Long> types = station.getChargers()
+                            .stream()
+                            .map(Charger::getChargerType)
+                            .map(ChargerType::getKey)
+                            .collect(Collectors.toList());
+                    return chargerTypes.containsAll(types);
+                })
                 .map(station -> new StationResponseDto(station, calculateDistance(station, request)))
-                .filter(station -> chargerTypes.containsAll(station.getChargerTypes()))
                 .sorted(Comparator.comparing(StationResponseDto::getDistance))
                 .collect(Collectors.toList());
 

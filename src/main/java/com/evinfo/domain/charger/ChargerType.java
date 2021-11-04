@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @RequiredArgsConstructor
@@ -48,5 +50,25 @@ public enum ChargerType {
 
     public Boolean isACSlow() {
         return this.key == 2L;
+    }
+
+    public static List<ChargerType> getChargerTypesByBoolean(Boolean isDCCombo, Boolean isDCDemo, Boolean isAC3, Boolean isACSlow) {
+        return Arrays.stream(ChargerType.values())
+                .filter(chargerType -> {
+                    if(isDCCombo && chargerType.isDCCombo()) {
+                        return true;
+                    }
+                    if(isDCDemo && chargerType.isDCDemo()) {
+                        return true;
+                    }
+                    if(isAC3 && chargerType.isAC3()) {
+                        return true;
+                    }
+                    if(isACSlow && chargerType.isACSlow()) {
+                        return true;
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
     }
 }

@@ -1,4 +1,3 @@
-# 언어 및 jdk 버전
 language: java
 jdk:
   - openjdk11
@@ -61,3 +60,8 @@ notifications:
   email:
     recipients:
       - dlrjsgml42@naver.com
+  slack:
+    rooms:
+      - secure: DvFU/wyAJvCwM/S7v4ZdTyfL66Yy2U4cRDOO00a+Db8fI4wCh9IZiA/wJfgD8OBt0qJ1aacphPqFib00w3RYBrfy1d1HL20mk0yeheP96CiES1nThHeJj+EexyyiVU+k8qeDT+y4g6RLOIl8PUD3dApQ5duS1tp8S1UT/BC9KX1zpASQrZcj/AWyuiA8hh8ZlDmcRArKO22/ZeUffOzpg4aRmLurFNdoTMiutv8BYWsvY+B/V1PlJYYcM+1dFgqrj/nFrZj6x0/3eqxru+KmXy07vMA/o0UOtogrIMQISdN4ojfGTxDwxNuZ/nUujtyFU5bLqA3Oj4fHLxhy+fL8onLzK4CSo+qZh8Tm3+x3JrxqLKqm91wfBMea065ZJslfr+/wESC5oYUPKpztn/u5l8ncbooXgxNsPW/Maqe4zv4+aHSMwRGJ0f9Ic+5WWSmuSiQW3aGWxoJwCqPcqhLmopiqizjk6zv3S0YYsdHpmeZ9YAJon8oclK0OP53vVULixzN4sF4r/9h/KMk8IA8GBi7975TXa0mZFDqwnxnE9XUZa0Gb7SVNxVdrYpuIDLMSfTyVKsDQjdpgwLuqxOPrmQQUGdxXUHRNJ98UfrJ4ixNqtzPBpbYEaswK5QDExPDrk+gRIZ3w0YgiF5IJSwhPlOVcFoS05ZuHqsdFirUkYoQ=
+    on_success: always
+    on_failure: always
