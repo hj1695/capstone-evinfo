@@ -12,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +22,10 @@ class StationServiceTest {
     private static final Double 사용자_위도 = 1.0;
     private static final Double 사용자_경도 = 10.0;
     private static final Long 사용자_요구_데이터_크기 = 1L;
-    private static final List<Long> 사용자_필터링_타입 = Arrays.asList(1L, 2L, 3L);
+    private static final Boolean 사용자_DC_COMBO = true;
+    private static final Boolean 사용자_DC_DEMO = true;
+    private static final Boolean 사용자_AC_3 = true;
+    private static final Boolean 사용자_AC_SLOW = true;
 
     private StationService stationService;
 
@@ -39,7 +41,8 @@ class StationServiceTest {
     @Test
     void getStationsTest() {
         List<Station> stations = ChargerGenerator.getStations();
-        StationRequestDto request = new StationRequestDto(사용자_위도, 사용자_경도, 사용자_요구_데이터_크기, 사용자_필터링_타입);
+        StationRequestDto request = new StationRequestDto(사용자_위도, 사용자_경도, 사용자_요구_데이터_크기,
+                사용자_DC_COMBO, 사용자_DC_DEMO, 사용자_AC_3, 사용자_AC_SLOW);
         when(stationRepository.findAllJoinFetch()).thenReturn(stations);
 
         List<StationResponseDto> foundStations = stationService.getStations(request);
