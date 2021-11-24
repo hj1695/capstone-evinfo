@@ -13,6 +13,7 @@ import java.util.Map;
 @ConfigurationProperties("rest")
 public class RestProperties {
     private final Map<String, String> evinfo;
+    private final Map<String, String> kakao;
 
     @NotBlank
     public String getEvinfoKey() {
@@ -47,5 +48,15 @@ public class RestProperties {
     @NotNull
     public Long getEvinfoPeriod() {
         return Long.valueOf(evinfo.get("period"));
+    }
+
+    @NotNull
+    public String getKakaoUrl() {
+        return kakao.get("url");
+    }
+
+    @NotNull
+    public String getKakaoAuthorization() {
+        return kakao.get("authorization");
     }
 }

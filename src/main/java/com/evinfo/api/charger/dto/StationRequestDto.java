@@ -17,20 +17,20 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class StationRequestDto {
     @NotNull
-    Double latitude;
+    private Double latitude;
     @NotNull
-    Double longitude;
+    private Double longitude;
     @NotNull
     @Max(1000)
-    Long size;
+    private Long size;
     @NotNull
-    Boolean isDCCombo;
+    private Boolean isDCCombo;
     @NotNull
-    Boolean isDCDemo;
+    private Boolean isDCDemo;
     @NotNull
-    Boolean isAC3;
+    private Boolean isAC3;
     @NotNull
-    Boolean isACSlow;
+    private Boolean isACSlow;
 
     public List<Long> getChargerTypeIds() {
         return ChargerType.getChargerTypesByBoolean(this.isDCCombo, this.isDCDemo, this.isAC3, this.isACSlow)
