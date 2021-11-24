@@ -43,6 +43,7 @@ include::{snippets}/common/response-fields.adoc[]
 include::{snippets}/common/custom-response-fields-errorCodes.adoc[]
 include::{snippets}/common/custom-response-fields-chargerStats.adoc[]
 include::{snippets}/common/custom-response-fields-chargerPrices.adoc[]
+include::{snippets}/common/custom-response-fields-locationCategories.adoc[]
 
 [[resources]]
 = API
@@ -70,3 +71,8 @@ operation::chargers/types[snippets='http-request,http-response,response-fields']
 === 편의시설 조회
 
 operation::locations/gets[snippets='http-request,http-response,request-parameters,response-fields']
+
+[[resources-locations-categories]]
+=== 가게 카테고리 조회
+
+operation::locations/categories[snippets='http-request,http-response,response-fields']

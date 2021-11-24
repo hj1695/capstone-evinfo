@@ -1,8 +1,10 @@
 package com.evinfo.api.map.controller;
 
 
+import com.evinfo.api.map.dto.LocationCategoryResponseDto;
 import com.evinfo.api.map.dto.LocationResponseDto;
 import com.evinfo.api.map.service.MapClient;
+import com.evinfo.api.map.service.MapService;
 import com.evinfo.docs.Documentation;
 import com.evinfo.utils.MapGenerator;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,11 +40,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {MapController.class})
-public class MapControllerTest extends Documentation {
+class MapControllerTest extends Documentation {
     private static final String API = "/api";
 
     @MockBean
     private MapClient mapClient;
+    @MockBean
+    private MapService mapService;
 
     private MockMvc mockMvc;
 
@@ -92,6 +96,32 @@ public class MapControllerTest extends Documentation {
                                 fieldWithPath("[].callNumber").type(JsonFieldType.STRING).description("가게의 전화번호"),
                                 fieldWithPath("[].address").type(JsonFieldType.STRING).description("가게의 주소"),
                                 fieldWithPath("[].placeUrl").type(JsonFieldType.STRING).description("가게의 daum map 기준 소개 url")
+                        )
+                ));
+    }
+
+    @DisplayName("'/locations/categories'로 GET 요청 시, 가게 카테고리의 목록을 반환한다.")
+    @Test
+    void getLocationCategoriesTest() throws Exception {
+        List<LocationCategoryResponseDto> responses = MapGenerator.getLocationCategoryResponses();
+        when(mapService.getLocationCategories()).thenReturn(responses);
+
+        this.mockMvc.perform(get(API + "/locations/categories")
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(4)))
+                .andExpect(jsonPath("$[0].key").value(responses.get(0).getKey()))
+                .andExpect(jsonPath("$[1].key").value(responses.get(1).getKey()))
+                .andExpect(jsonPath("$[0].name").value(responses.get(0).getName()))
+                .andExpect(jsonPath("$[1].name").value(responses.get(1).getName()))
+                .andDo(print())
+                .andDo(document("locations/categories",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        responseFields(
+                                fieldWithPath("[]").type(JsonFieldType.ARRAY).description("가게 카테고리의 목록"),
+                                fieldWithPath("[].key").type(JsonFieldType.STRING).description("가게 카테고리의 ID 값"),
+                                fieldWithPath("[].name").type(JsonFieldType.STRING).description("가게 카테고리의 이름")
                         )
                 ));
     }
