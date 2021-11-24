@@ -62,3 +62,11 @@ operation::stations/gets[snippets='http-request,http-response,request-parameters
 === 충전소 타입 조회
 
 operation::chargers/types[snippets='http-request,http-response,response-fields']
+
+[[resources-locations]]
+== 편의시설
+
+[[resources-locations-gets]]
+=== 편의시설 조회
+
+operation::locations/gets[snippets='http-request,http-response,request-parameters,response-fields']
