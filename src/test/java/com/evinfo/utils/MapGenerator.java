@@ -1,9 +1,12 @@
 package com.evinfo.utils;
 
+import com.evinfo.api.map.dto.LocationCategoryResponseDto;
 import com.evinfo.api.map.dto.LocationResponseDto;
+import com.evinfo.domain.map.LocationCategory;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MapGenerator {
     private static final String 가게_이름_1 = "가게 이름 1";
@@ -43,5 +46,11 @@ public class MapGenerator {
 
     public static List<LocationResponseDto> getLocations() {
         return Arrays.asList(location1, location2);
+    }
+
+    public static List<LocationCategoryResponseDto> getLocationCategoryResponses() {
+        return Arrays.stream(LocationCategory.values())
+                .map(LocationCategoryResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
