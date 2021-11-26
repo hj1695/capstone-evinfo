@@ -1,6 +1,7 @@
 package com.evinfo.api.charger.service;
 
 
+import com.evinfo.api.charger.dto.StationBusinessResponseDto;
 import com.evinfo.api.charger.dto.StationRequestDto;
 import com.evinfo.api.charger.dto.StationResponseDto;
 import com.evinfo.api.charger.repository.StationRepository;
@@ -21,6 +22,15 @@ public class StationService {
     private final StationRepository stationRepository;
     private static final Double RADIUS = 6371.0;
     private static final Double KILOMETER_PER_METER = 1000.0;
+
+    @Transactional(readOnly = true)
+    public List<StationBusinessResponseDto> getStationBusinesses() {
+        return stationRepository.findBusinessNameWithCount()
+                .stream()
+                .filter(b -> b.getCount() > 100)
+                .map(b -> new StationBusinessResponseDto(b.getBusinessName(), b.getCount()))
+                .collect(Collectors.toList());
+    }
 
     @Transactional(readOnly = true)
     public List<StationResponseDto> getStations(StationRequestDto request) {
