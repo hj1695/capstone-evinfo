@@ -72,6 +72,7 @@ public class MapClient {
                             .longitude(kakao.getX())
                             .callNumber(kakao.getPhone())
                             .placeUrl(kakao.getPlaceUrl())
+                            .category(kakao.getCategoryGroupCode())
                             .build();
                 })
                 .collect(Collectors.toList());

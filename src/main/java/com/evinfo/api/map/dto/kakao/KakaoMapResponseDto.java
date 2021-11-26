@@ -14,6 +14,7 @@ public class KakaoMapResponseDto {
     private Double distance;
     private String placeUrl;
     private String categoryName;
+    private String categoryGroupCode;
     private String addressName;
     private String roadAddressName;
     private String id;
