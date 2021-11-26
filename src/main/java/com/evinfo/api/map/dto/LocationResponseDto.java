@@ -15,4 +15,5 @@ public class LocationResponseDto {
     private final String callNumber;
     private final String address;
     private final String placeUrl;
+    private final String category;
 }
