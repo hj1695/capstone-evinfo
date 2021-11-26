@@ -1,5 +1,6 @@
 package com.evinfo.api.charger.controller;
 
+import com.evinfo.api.charger.dto.StationBusinessResponseDto;
 import com.evinfo.api.charger.dto.StationRequestDto;
 import com.evinfo.api.charger.dto.StationResponseDto;
 import com.evinfo.api.charger.service.StationService;
@@ -21,6 +22,14 @@ public class StationController {
     @GetMapping("/stations")
     public ResponseEntity<List<StationResponseDto>> getStations(@Valid StationRequestDto request) {
         final List<StationResponseDto> responses = stationService.getStations(request);
+
+        return ResponseEntity.ok()
+                .body(responses);
+    }
+
+    @GetMapping("/stations/businesses")
+    public ResponseEntity<List<StationBusinessResponseDto>> getStationBusinesses() {
+        final List<StationBusinessResponseDto> responses = stationService.getStationBusinesses();
 
         return ResponseEntity.ok()
                 .body(responses);
