@@ -1,6 +1,7 @@
 package com.evinfo.utils;
 
 import com.evinfo.api.charger.dto.ChargerTypeResponseDto;
+import com.evinfo.api.charger.dto.StationBusinessResponseDto;
 import com.evinfo.api.charger.dto.client.ChargerClientResponseDto;
 import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
@@ -101,6 +102,13 @@ public class ChargerGenerator {
 
     public static List<Station> getStations() {
         return Arrays.asList(station1, station2);
+    }
+
+    public static List<StationBusinessResponseDto> getStationBusinesses() {
+        return Arrays.asList(
+                new StationBusinessResponseDto("운영기관 1", 10L),
+                new StationBusinessResponseDto("운영기관 2", 5L)
+        );
     }
 
     public static List<ChargerClientResponseDto> getClientChargers() {

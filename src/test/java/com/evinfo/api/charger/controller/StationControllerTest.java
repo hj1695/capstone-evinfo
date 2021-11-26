@@ -1,5 +1,6 @@
 package com.evinfo.api.charger.controller;
 
+import com.evinfo.api.charger.dto.StationBusinessResponseDto;
 import com.evinfo.api.charger.dto.StationResponseDto;
 import com.evinfo.api.charger.service.StationService;
 import com.evinfo.docs.Documentation;
@@ -178,5 +179,31 @@ class StationControllerTest extends Documentation {
                 .andExpect(jsonPath("status").value(ErrorCode.INVALID_INPUT_VALUE.getStatus()))
                 .andExpect(jsonPath("code").value(ErrorCode.INVALID_INPUT_VALUE.getCode()))
                 .andDo(print());
+    }
+
+    @DisplayName("'/stations/businesses'로 GET 요청 시, 충전소의 운영기관 및 카운트 목록을 반환한다.")
+    @Test
+    void getStationBusinessesTest() throws Exception {
+        List<StationBusinessResponseDto> responses = ChargerGenerator.getStationBusinesses();
+        when(stationService.getStationBusinesses()).thenReturn(responses);
+
+        this.mockMvc.perform(get(API + "/stations/businesses")
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].businessName").value(responses.get(0).getBusinessName()))
+                .andExpect(jsonPath("$[1].businessName").value(responses.get(1).getBusinessName()))
+                .andExpect(jsonPath("$[0].count").value(responses.get(0).getCount()))
+                .andExpect(jsonPath("$[1].count").value(responses.get(1).getCount()))
+                .andDo(print())
+                .andDo(document("stations/businesses",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        responseFields(
+                                fieldWithPath("[]").type(JsonFieldType.ARRAY).description("전체 충전소 운영기관의 목록"),
+                                fieldWithPath("[].businessName").type(JsonFieldType.STRING).description("충전소 운영기관의 이름"),
+                                fieldWithPath("[].count").type(JsonFieldType.NUMBER).description("충전소 운영기관의 소속 충전기 개수")
+                        )
+                ));
     }
 }
