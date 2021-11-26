@@ -20,6 +20,8 @@ public class MapGenerator {
     private static final String 가게_전화번호_2 = "02-1234-5678";
     private static final String 가게_URL_1 = "kakao.com";
     private static final String 가게_URL_2 = "naver.com";
+    private static final String 가게_카테고리_1 = "MT1";
+    private static final String 가게_카테고리_2 = "CS2";
 
     private static final LocationResponseDto location1, location2;
 
@@ -32,6 +34,7 @@ public class MapGenerator {
                 .longitude(가게_경도)
                 .placeUrl(가게_URL_1)
                 .distance(가게_거리)
+                .category(가게_카테고리_1)
                 .build();
         location2 = LocationResponseDto.builder()
                 .name(가게_이름_2)
@@ -41,6 +44,7 @@ public class MapGenerator {
                 .longitude(가게_경도)
                 .placeUrl(가게_URL_2)
                 .distance(가게_거리)
+                .category(가게_카테고리_2)
                 .build();
     }
 

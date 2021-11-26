@@ -67,7 +67,7 @@ class MapControllerTest extends Documentation {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.put("latitude", Collections.singletonList("37.0"));
         params.put("longitude", Collections.singletonList("127.0"));
-        params.put("category", Collections.singletonList("CE7"));
+        params.put("category", Collections.singletonList("CE7,MT1"));
 
         this.mockMvc.perform(get(API + "/locations")
                 .params(params)
@@ -85,7 +85,7 @@ class MapControllerTest extends Documentation {
                         requestParameters(
                                 parameterWithName("latitude").description("사용자의 위도 값"),
                                 parameterWithName("longitude").description("사용자의 경도 값"),
-                                parameterWithName("category").description("반환받고자 하는 가게의 카테고리 문자열 값")
+                                parameterWithName("category").description("반환받고자 하는 가게의 카테고리 문자열 목록")
                         ),
                         responseFields(
                                 fieldWithPath("[]").type(JsonFieldType.ARRAY).description("전체 가게의 목록"),
@@ -95,7 +95,8 @@ class MapControllerTest extends Documentation {
                                 fieldWithPath("[].distance").type(JsonFieldType.NUMBER).description("지정한 위치에서 가게까지의 거리"),
                                 fieldWithPath("[].callNumber").type(JsonFieldType.STRING).description("가게의 전화번호"),
                                 fieldWithPath("[].address").type(JsonFieldType.STRING).description("가게의 주소"),
-                                fieldWithPath("[].placeUrl").type(JsonFieldType.STRING).description("가게의 daum map 기준 소개 url")
+                                fieldWithPath("[].placeUrl").type(JsonFieldType.STRING).description("가게의 daum map 기준 소개 url"),
+                                fieldWithPath("[].category").type(JsonFieldType.STRING).description("가게가 속하는 카테고리 코드")
                         )
                 ));
     }
