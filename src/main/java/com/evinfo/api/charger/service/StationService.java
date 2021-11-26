@@ -27,6 +27,7 @@ public class StationService {
     public List<StationBusinessResponseDto> getStationBusinesses() {
         return stationRepository.findBusinessNameWithCount()
                 .stream()
+                .filter(b -> b.getCount() > 100)
                 .map(b -> new StationBusinessResponseDto(b.getBusinessName(), b.getCount()))
                 .collect(Collectors.toList());
     }
