@@ -2,6 +2,7 @@ package com.evinfo.api.charger.service;
 
 
 import com.evinfo.api.charger.dto.StationBusinessResponseDto;
+import com.evinfo.api.charger.dto.StationFilterRequestDto;
 import com.evinfo.api.charger.dto.StationRequestDto;
 import com.evinfo.api.charger.dto.StationResponseDto;
 import com.evinfo.api.charger.repository.StationRepository;
@@ -55,7 +56,39 @@ public class StationService {
         return responses.subList(0, request.getSize().intValue());
     }
 
+    @Transactional(readOnly = true)
+    public List<StationResponseDto> getStationsWithBusiness(StationFilterRequestDto request) {
+        var business = request.getBusinesses();
+        List<StationResponseDto> responses = stationRepository.findAllJoinFetch()
+                .stream()
+                .parallel()
+                .filter(station -> business.contains(station.getBusinessName()))
+                .map(station -> new StationResponseDto(station, calculateDistance(station, request)))
+                .sorted(Comparator.comparing(StationResponseDto::getDistance))
+                .collect(Collectors.toList());
+
+        if (request.getSize() > responses.size())
+            return responses;
+        return responses.subList(0, request.getSize().intValue());
+    }
+
     private Double calculateDistance(Station station, StationRequestDto request) {
+        double toRadian = Math.PI / 180.0;
+
+        double deltaLatitude = Math.abs(station.getLatitude() - request.getLatitude()) * toRadian;
+        double deltaLongitude = Math.abs(station.getLongitude() - request.getLongitude()) * toRadian;
+
+        double sinDeltaLatitude = Math.sin(deltaLatitude / 2.0);
+        double sinDeltaLongitude = Math.sin(deltaLongitude / 2.0);
+        double squareRoot = Math.sqrt(
+                sinDeltaLatitude * sinDeltaLatitude +
+                        Math.cos(station.getLatitude() * toRadian) * Math.cos(station.getLatitude() * toRadian) * sinDeltaLongitude * sinDeltaLongitude);
+        double distance = 2 * RADIUS * Math.asin(squareRoot);
+
+        return Math.round(distance * KILOMETER_PER_METER) / KILOMETER_PER_METER;
+    }
+
+    private Double calculateDistance(Station station, StationFilterRequestDto request) {
         double toRadian = Math.PI / 180.0;
 
         double deltaLatitude = Math.abs(station.getLatitude() - request.getLatitude()) * toRadian;
