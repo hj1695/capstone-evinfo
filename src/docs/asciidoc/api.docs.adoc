@@ -56,6 +56,11 @@ include::{snippets}/common/custom-response-fields-locationCategories.adoc[]
 
 operation::stations/gets[snippets='http-request,http-response,request-parameters,response-fields']
 
+[[resources-stations-filters]]
+=== 충전소 운영기관 필터링 조회
+
+operation::stations/filters[snippets='http-request,http-response,request-parameters,response-fields']
+
 [[resources-stations-businesses]]
 === 충전소 운영기관 조회
 

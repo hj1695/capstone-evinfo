@@ -26,7 +26,8 @@ public class ChargerGenerator {
     private static final String 충전소_주소 = "주소 예시";
     private static final String 충전소_세부_주소 = "주소 세부설명 예시";
     private static final String 충전소_사용시간 = "사용시간 예시";
-    private static final String 충전소_운영기관명 = "운영 기관명 예시";
+    private static final String 충전소_운영기관명_1 = "운영기관 1";
+    private static final String 충전소_운영기관명_2 = "운영기관 2";
     private static final Double 충전소_위도_1 = 1.0;
     private static final Double 충전소_위도_2 = 2.0;
     private static final Double 충전소_경도_1 = 10.0;
@@ -51,7 +52,7 @@ public class ChargerGenerator {
                 .latitude(충전소_위도_1)
                 .longitude(충전소_경도_1)
                 .callNumber(충전소_전화번호)
-                .businessName(충전소_운영기관명)
+                .businessName(충전소_운영기관명_1)
                 .isLimit(true)
                 .isParkingFree(true)
                 .build();
@@ -64,7 +65,7 @@ public class ChargerGenerator {
                 .latitude(충전소_위도_2)
                 .longitude(충전소_경도_2)
                 .callNumber(충전소_전화번호)
-                .businessName(충전소_운영기관명)
+                .businessName(충전소_운영기관명_2)
                 .isLimit(true)
                 .isParkingFree(true)
                 .build();
