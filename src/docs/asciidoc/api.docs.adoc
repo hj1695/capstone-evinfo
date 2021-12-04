@@ -86,3 +86,11 @@ operation::locations/gets[snippets='http-request,http-response,request-parameter
 === 가게 카테고리 조회
 
 operation::locations/categories[snippets='http-request,http-response,response-fields']
+
+[[resources-reviews]]
+== 리뷰
+
+[[resources-reviews-create]]
+=== 리뷰 생성
+
+operation::reviews/create[snippets='http-request,http-response,request-fields,response-fields']
