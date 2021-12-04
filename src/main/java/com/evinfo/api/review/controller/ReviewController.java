@@ -22,7 +22,7 @@ public class ReviewController {
     @PostMapping("/reviews")
     public ResponseEntity<ReviewResponseDto> createReview(@RequestBody @Valid final ReviewCreateRequestDto request) {
         final ReviewResponseDto response = reviewService.createReview(request);
-        final URI uri = URI.create("/api/reviews");
+        final URI uri = URI.create("/api/reviews/" + response.getId());
 
         return ResponseEntity.created(uri)
                 .body(response);
