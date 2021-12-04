@@ -7,6 +7,7 @@ import com.evinfo.domain.charger.Charger;
 import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.ChargerType;
 import com.evinfo.domain.charger.Station;
+import com.evinfo.domain.review.Review;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +41,7 @@ public class ChargerGenerator {
 
     private static final Charger charger1, charger2;
     private static final Station station1, station2;
+    private static final Review review1, review2;
 
     static {
         var formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -89,8 +91,12 @@ public class ChargerGenerator {
                 .lastChargeDateTime(LocalDateTime.parse(충전기_마지막_충전시간, formatter))
                 .startChargeDateTime(LocalDateTime.parse(충전기_충전_시작시간, formatter))
                 .build();
+        review1 = new Review(1L, "리뷰 내용 1", 5.0, station1);
+        review2 = new Review(2L, "리뷰 내용 2", 3.0, station2);
         station1.addCharger(charger1);
         station2.addCharger(charger2);
+        station1.addReview(review1);
+        station2.addReview(review2);
     }
 
     public static Charger getCharger() {
