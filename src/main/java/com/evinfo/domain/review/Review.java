@@ -28,4 +28,10 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "STATION_ID")
     private Station station;
+
+    public Review(String content, Double star, Station station) {
+        this.content = content;
+        this.star = star;
+        this.station = station;
+    }
 }
