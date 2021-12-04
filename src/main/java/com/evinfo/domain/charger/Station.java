@@ -1,5 +1,6 @@
 package com.evinfo.domain.charger;
 
+import com.evinfo.domain.review.Review;
 import lombok.*;
 
 import javax.persistence.CascadeType;
@@ -48,6 +49,10 @@ public class Station {
 
     @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
     private final List<Charger> chargers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
+    private final List<Review> reviews = new ArrayList<>();
+
     @NotNull
     private Boolean isLimit;
     @NotNull
@@ -56,5 +61,9 @@ public class Station {
     public void addCharger(final Charger charger) {
         this.chargers.add(charger);
         charger.updateStation(this);
+    }
+
+    public void addReview(final Review review) {
+        this.reviews.add(review);
     }
 }
