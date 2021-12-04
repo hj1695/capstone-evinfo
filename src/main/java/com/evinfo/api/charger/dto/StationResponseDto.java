@@ -1,5 +1,6 @@
 package com.evinfo.api.charger.dto;
 
+import com.evinfo.api.review.dto.ReviewResponseDto;
 import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.Station;
 import lombok.Getter;
@@ -23,6 +24,8 @@ public class StationResponseDto {
     private final Boolean isLimit;
     private final Boolean isParkingFree;
     private final List<ChargerResponseDto> chargers;
+    private final Double reviewAverage;
+    private final List<ReviewResponseDto> reviews;
 
     public StationResponseDto(final Station station, final Double distance) {
         this.stationName = station.getStationName();
@@ -41,6 +44,16 @@ public class StationResponseDto {
                 .stream()
                 .map(ChargerResponseDto::new)
                 .collect(Collectors.toList());
+        this.reviews = station.getReviews()
+                .stream()
+                .map(ReviewResponseDto::new)
+                .collect(Collectors.toList());
+        if (this.reviews.isEmpty()) {
+            this.reviewAverage = 0.0;
+        } else {
+            this.reviewAverage = reviews.stream()
+                    .collect(Collectors.averagingDouble(ReviewResponseDto::getStar));
+        }
         this.enableChargers = (int) station.getChargers()
                 .stream()
                 .filter(charger -> charger.getChargerStat().equals(ChargerStat.WAITING))

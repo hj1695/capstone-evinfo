@@ -38,7 +38,6 @@ public class StationService {
         var chargerTypes = request.getChargerTypeIds();
         List<StationResponseDto> responses = stationRepository.findAllJoinFetch()
                 .stream()
-                .parallel()
                 .filter(station -> {
                     List<Long> types = station.getChargers()
                             .stream()

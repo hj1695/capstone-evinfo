@@ -1,6 +1,9 @@
 spring:
   config:
     import: rest.yml
+  jpa:
+    properties:
+      hibernate.default_batch_fetch_size: 1000
 server:
   http2:
     enabled: true

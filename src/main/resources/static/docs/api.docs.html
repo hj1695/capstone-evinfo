@@ -774,7 +774,7 @@ Host: localhost</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1508
+Content-Length: 1740
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -801,6 +801,12 @@ Content-Length: 1508
     "price" : 100.0,
     "lastChargeDateTime" : "2010-01-01T12:00:00",
     "startChargeDateTime" : "2010-01-01T12:00:00"
+  } ],
+  "reviewAverage" : 5.0,
+  "reviews" : [ {
+    "id" : 1,
+    "content" : "리뷰 내용 1",
+    "star" : 5.0
   } ]
 }, {
   "stationName" : "충전기 충전소 이름 2",
@@ -827,6 +833,12 @@ Content-Length: 1508
     "price" : 100.0,
     "lastChargeDateTime" : "2010-01-01T12:00:00",
     "startChargeDateTime" : "2010-01-01T12:00:00"
+  } ],
+  "reviewAverage" : 3.0,
+  "reviews" : [ {
+    "id" : 2,
+    "content" : "리뷰 내용 2",
+    "star" : 3.0
   } ]
 } ]</code></pre>
 </div>
@@ -954,24 +966,49 @@ Content-Length: 1508
 <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 주차요금 무료 여부</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].distance</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">현재 위치 기준 충전소와의 거리(단위: km)</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].distance</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">현재 위치 기준 충전소와의 거리(단위: km)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].enableChargers</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 사용 가능한 대기 충전기의 개수</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].enableChargers</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 사용 가능한 대기 충전기의 개수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 충전기 목록</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviewAverage</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 리뷰 별점 평균</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].chargerId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 ID</p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 리뷰 목록</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].id</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 ID</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].content</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 내용</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].star</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 0.5점 단위의 별점</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 충전기 목록</p></td>
+</tr>
+<tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].chargerId</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 충전기의 ID</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers[].output</code></p></td>
@@ -1047,7 +1084,7 @@ Host: localhost</code></pre>
         <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1508
+Content-Length: 1740
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -1074,6 +1111,12 @@ Content-Length: 1508
     "price" : 100.0,
     "lastChargeDateTime" : "2010-01-01T12:00:00",
     "startChargeDateTime" : "2010-01-01T12:00:00"
+  } ],
+  "reviewAverage" : 5.0,
+  "reviews" : [ {
+    "id" : 1,
+    "content" : "리뷰 내용 1",
+    "star" : 5.0
   } ]
 }, {
   "stationName" : "충전기 충전소 이름 2",
@@ -1100,6 +1143,12 @@ Content-Length: 1508
     "price" : 100.0,
     "lastChargeDateTime" : "2010-01-01T12:00:00",
     "startChargeDateTime" : "2010-01-01T12:00:00"
+  } ],
+  "reviewAverage" : 3.0,
+  "reviews" : [ {
+    "id" : 2,
+    "content" : "리뷰 내용 2",
+    "star" : 3.0
   } ]
 } ]</code></pre>
         </div>
@@ -1228,6 +1277,31 @@ Content-Length: 1508
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].enableChargers</code></p></td>
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
           <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 사용 가능한 대기 충전기의 개수</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviewAverage</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 리뷰 별점 평균</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 리뷰 목록</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].id</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 ID</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].content</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 내용</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].star</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 0.5점 단위의 별점</p></td>
         </tr>
         <tr>
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
