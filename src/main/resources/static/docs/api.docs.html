@@ -467,6 +467,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   <li><a href="#resources-reviews">리뷰</a>
     <ul class="sectlevel2">
       <li><a href="#resources-reviews-create">리뷰 생성</a></li>
+      <li><a href="#resources-reviews-get">리뷰 조회</a></li>
+      <li><a href="#resources-reviews-delete">리뷰 삭제</a></li>
     </ul>
   </li>
 </ul>
@@ -774,7 +776,7 @@ Host: localhost</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1740
+Content-Length: 1836
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -806,7 +808,8 @@ Content-Length: 1740
   "reviews" : [ {
     "id" : 1,
     "content" : "리뷰 내용 1",
-    "star" : 5.0
+    "star" : 5.0,
+    "createdAt" : "2021-12-08T00:26:28.231736"
   } ]
 }, {
   "stationName" : "충전기 충전소 이름 2",
@@ -838,7 +841,8 @@ Content-Length: 1740
   "reviews" : [ {
     "id" : 2,
     "content" : "리뷰 내용 2",
-    "star" : 3.0
+    "star" : 3.0,
+    "createdAt" : "2021-12-08T00:26:28.231801"
   } ]
 } ]</code></pre>
 </div>
@@ -1001,6 +1005,11 @@ Content-Length: 1740
   <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 0.5점 단위의 별점</p></td>
 </tr>
 <tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].createdAt</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">생성된 리뷰의 생성 날짜 및 시간</p></td>
+</tr>
+<tr>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
   <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 충전기 목록</p></td>
@@ -1084,7 +1093,7 @@ Host: localhost</code></pre>
         <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1740
+Content-Length: 1836
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -1116,7 +1125,8 @@ Content-Length: 1740
   "reviews" : [ {
     "id" : 1,
     "content" : "리뷰 내용 1",
-    "star" : 5.0
+    "star" : 5.0,
+    "createdAt" : "2021-12-08T00:26:28.231736"
   } ]
 }, {
   "stationName" : "충전기 충전소 이름 2",
@@ -1148,7 +1158,8 @@ Content-Length: 1740
   "reviews" : [ {
     "id" : 2,
     "content" : "리뷰 내용 2",
-    "star" : 3.0
+    "star" : 3.0,
+    "createdAt" : "2021-12-08T00:26:28.231801"
   } ]
 } ]</code></pre>
         </div>
@@ -1302,6 +1313,12 @@ Content-Length: 1740
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].star</code></p></td>
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
           <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 0.5점 단위의 별점</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].createdAt</code></p>
+          </td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">생성된 리뷰의 생성 날짜 및 시간</p></td>
         </tr>
         <tr>
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
@@ -1794,12 +1811,13 @@ Host: localhost
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Location: /api/reviews/1
 Content-Type: application/json
-Content-Length: 54
+Content-Length: 100
 
 {
   "id" : 1,
   "content" : "내용",
-  "star" : 5.0
+  "star" : 5.0,
+  "createdAt" : "2021-12-08T00:26:31.012993"
 }</code></pre>
             </div>
           </div>
@@ -1878,6 +1896,167 @@ Content-Length: 54
               <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
               <td class="tableblock halign-left valign-top"><p class="tableblock">생성된 리뷰의 0.5점 단위의 별점</p></td>
             </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>createdAt</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">생성된 리뷰의 생성 날짜 및 시간</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sect2">
+        <h3 id="resources-reviews-get"><a class="link" href="#resources-reviews-get">리뷰 조회</a></h3>
+        <div class="sect3">
+          <h4 id="resources-reviews-get_http_request"><a class="link" href="#resources-reviews-get_http_request">Example
+            Request</a></h4>
+          <div class="listingblock">
+            <div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/reviews?stationId=STATION_ID HTTP/1.1
+Content-Type: application/json
+Host: localhost</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="sect3">
+          <h4 id="resources-reviews-get_http_response"><a class="link" href="#resources-reviews-get_http_response">Example
+            Response</a></h4>
+          <div class="listingblock">
+            <div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 224
+
+[ {
+  "id" : 1,
+  "content" : "리뷰 내용 1",
+  "star" : 5.0,
+  "createdAt" : "2021-12-08T00:26:28.231736"
+}, {
+  "id" : 2,
+  "content" : "리뷰 내용 2",
+  "star" : 3.0,
+  "createdAt" : "2021-12-08T00:26:28.231801"
+} ]</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="sect3">
+          <h4 id="resources-reviews-get_request_parameters"><a class="link"
+                                                               href="#resources-reviews-get_request_parameters">Request
+            parameters</a></h4>
+          <table class="tableblock frame-all grid-all stretch">
+            <colgroup>
+              <col style="width: 50%;">
+              <col style="width: 50%;">
+            </colgroup>
+            <thead>
+            <tr>
+              <th class="tableblock halign-left valign-top">Parameter</th>
+              <th class="tableblock halign-left valign-top">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>stationId</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">리뷰를 확인하고자 하는 충전소의 ID</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sect3">
+          <h4 id="resources-reviews-get_response_fields"><a class="link" href="#resources-reviews-get_response_fields">Response
+            fields</a></h4>
+          <table class="tableblock frame-all grid-all stretch">
+            <colgroup>
+              <col style="width: 33.3333%;">
+              <col style="width: 33.3333%;">
+              <col style="width: 33.3334%;">
+            </colgroup>
+            <thead>
+            <tr>
+              <th class="tableblock halign-left valign-top">필드명</th>
+              <th class="tableblock halign-left valign-top">타입</th>
+              <th class="tableblock halign-left valign-top">설명</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[]</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">선택된 리뷰의 목록</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].id</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">선택된 리뷰의 ID</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].content</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">선택된 리뷰의 내용</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].star</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">선택된 리뷰의 0.5점 단위의 별점</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].createdAt</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">선택된 리뷰의 생성 날짜 및 시간</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sect2">
+        <h3 id="resources-reviews-delete"><a class="link" href="#resources-reviews-delete">리뷰 삭제</a></h3>
+        <div class="sect3">
+          <h4 id="resources-reviews-delete_http_request"><a class="link" href="#resources-reviews-delete_http_request">Example
+            Request</a></h4>
+          <div class="listingblock">
+            <div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/reviews/1 HTTP/1.1
+Accept: application/json
+Host: localhost</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="sect3">
+          <h4 id="resources-reviews-delete_http_response"><a class="link"
+                                                             href="#resources-reviews-delete_http_response">Example
+            Response</a></h4>
+          <div class="listingblock">
+            <div class="content">
+              <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 204 No Content</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="sect3">
+          <h4 id="resources-reviews-delete_path_parameters"><a class="link"
+                                                               href="#resources-reviews-delete_path_parameters">Path
+            parameters</a></h4>
+          <table class="tableblock frame-all grid-all stretch">
+            <caption class="title">Table 1. /api/reviews/{reviewId}</caption>
+            <colgroup>
+              <col style="width: 33.3333%;">
+              <col style="width: 33.3333%;">
+              <col style="width: 33.3334%;">
+            </colgroup>
+            <thead>
+            <tr>
+              <th class="tableblock halign-left valign-top">필드명</th>
+              <th class="tableblock halign-left valign-top">설명</th>
+              <th class="tableblock halign-left valign-top">필수값</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>reviewId</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">삭제할 리뷰의 ID</p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -1887,7 +2066,7 @@ Content-Length: 54
 </div>
 <div id="footer">
 <div id="footer-text">
-  Last updated 2021-12-04 13:39:31 +0900
+  Last updated 2021-12-08 00:25:43 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">

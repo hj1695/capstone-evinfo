@@ -44,7 +44,7 @@ public class StationResponseDto {
                 .stream()
                 .map(ChargerResponseDto::new)
                 .collect(Collectors.toList());
-        this.reviews = station.getReviews()
+        this.reviews = station.getReviews() // TODO: 2021/12/07 여기서 정렬 필요할지 고민해보기
                 .stream()
                 .map(ReviewResponseDto::new)
                 .collect(Collectors.toList());
