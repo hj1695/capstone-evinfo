@@ -91,8 +91,8 @@ public class ChargerGenerator {
                 .lastChargeDateTime(LocalDateTime.parse(충전기_마지막_충전시간, formatter))
                 .startChargeDateTime(LocalDateTime.parse(충전기_충전_시작시간, formatter))
                 .build();
-        review1 = new Review(1L, "리뷰 내용 1", 5.0, station1);
-        review2 = new Review(2L, "리뷰 내용 2", 3.0, station2);
+        review1 = new Review(1L, "리뷰 내용 1", 5.0, LocalDateTime.now(), station1);
+        review2 = new Review(2L, "리뷰 내용 2", 3.0, LocalDateTime.now(), station2);
         station1.addCharger(charger1);
         station2.addCharger(charger2);
         station1.addReview(review1);
