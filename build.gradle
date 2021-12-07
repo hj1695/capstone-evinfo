@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.evinfo'
-version = '1.3.2-SNAPSHOT'
+version = '1.5.0-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
