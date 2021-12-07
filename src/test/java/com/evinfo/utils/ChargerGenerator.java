@@ -165,4 +165,8 @@ public class ChargerGenerator {
                 .map(ChargerTypeResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    public static List<Review> getReviews() {
+        return Arrays.asList(review1, review2);
+    }
 }
