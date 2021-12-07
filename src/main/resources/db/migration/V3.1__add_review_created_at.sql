@@ -1,0 +1,2 @@
+ALTER TABLE review
+    ADD COLUMN created_at DATETIME NOT NULL;
