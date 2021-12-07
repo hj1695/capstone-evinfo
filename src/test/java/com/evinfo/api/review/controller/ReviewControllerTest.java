@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDateTime;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -53,7 +55,7 @@ public class ReviewControllerTest extends Documentation {
     void createReviewTest() throws Exception {
         // TODO: 2021/12/04 추후 util 클래스 만들어서 리팩토링하기
         Station station = ChargerGenerator.getStations().get(0);
-        ReviewResponseDto response = new ReviewResponseDto(new Review(1L, "내용", 5.0, station));
+        ReviewResponseDto response = new ReviewResponseDto(new Review(1L, "내용", 5.0, LocalDateTime.now(), station));
         ReviewCreateRequestDto request = new ReviewCreateRequestDto("내용", 5.0, station.getStationId());
         String requestMapped = OBJECT_MAPPER.writeValueAsString(request);
         when(reviewService.createReview(any())).thenReturn(response);
@@ -76,7 +78,8 @@ public class ReviewControllerTest extends Documentation {
                         responseFields(
                                 fieldWithPath("id").type(JsonFieldType.NUMBER).description("생성된 리뷰의 ID"),
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("생성된 리뷰의 내용"),
-                                fieldWithPath("star").type(JsonFieldType.NUMBER).description("생성된 리뷰의 0.5점 단위의 별점")
+                                fieldWithPath("star").type(JsonFieldType.NUMBER).description("생성된 리뷰의 0.5점 단위의 별점"),
+                                fieldWithPath("createdAt").type(JsonFieldType.STRING).description("생성된 리뷰의 생성 날짜 및 시간")
                         )
                 ));
     }

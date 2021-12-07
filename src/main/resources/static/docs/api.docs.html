@@ -774,7 +774,7 @@ Host: localhost</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1740
+Content-Length: 1836
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -806,7 +806,8 @@ Content-Length: 1740
   "reviews" : [ {
     "id" : 1,
     "content" : "리뷰 내용 1",
-    "star" : 5.0
+    "star" : 5.0,
+    "createdAt" : "2021-12-07T22:50:54.307052"
   } ]
 }, {
   "stationName" : "충전기 충전소 이름 2",
@@ -838,7 +839,8 @@ Content-Length: 1740
   "reviews" : [ {
     "id" : 2,
     "content" : "리뷰 내용 2",
-    "star" : 3.0
+    "star" : 3.0,
+    "createdAt" : "2021-12-07T22:50:54.307079"
   } ]
 } ]</code></pre>
 </div>
@@ -1001,6 +1003,11 @@ Content-Length: 1740
   <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 0.5점 단위의 별점</p></td>
 </tr>
 <tr>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].createdAt</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+  <td class="tableblock halign-left valign-top"><p class="tableblock">생성된 리뷰의 생성 날짜 및 시간</p></td>
+</tr>
+<tr>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
   <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
   <td class="tableblock halign-left valign-top"><p class="tableblock">충전소의 충전기 목록</p></td>
@@ -1084,7 +1091,7 @@ Host: localhost</code></pre>
         <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1740
+Content-Length: 1836
 
 [ {
   "stationName" : "충전기 충전소 이름 1",
@@ -1116,7 +1123,8 @@ Content-Length: 1740
   "reviews" : [ {
     "id" : 1,
     "content" : "리뷰 내용 1",
-    "star" : 5.0
+    "star" : 5.0,
+    "createdAt" : "2021-12-07T22:50:54.307052"
   } ]
 }, {
   "stationName" : "충전기 충전소 이름 2",
@@ -1148,7 +1156,8 @@ Content-Length: 1740
   "reviews" : [ {
     "id" : 2,
     "content" : "리뷰 내용 2",
-    "star" : 3.0
+    "star" : 3.0,
+    "createdAt" : "2021-12-07T22:50:54.307079"
   } ]
 } ]</code></pre>
         </div>
@@ -1302,6 +1311,12 @@ Content-Length: 1740
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].star</code></p></td>
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
           <td class="tableblock halign-left valign-top"><p class="tableblock">충전소에 속하는 리뷰의 0.5점 단위의 별점</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reviews[].createdAt</code></p>
+          </td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">생성된 리뷰의 생성 날짜 및 시간</p></td>
         </tr>
         <tr>
           <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].chargers</code></p></td>
@@ -1794,12 +1809,13 @@ Host: localhost
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Location: /api/reviews/1
 Content-Type: application/json
-Content-Length: 54
+Content-Length: 99
 
 {
   "id" : 1,
   "content" : "내용",
-  "star" : 5.0
+  "star" : 5.0,
+  "createdAt" : "2021-12-07T22:50:57.68556"
 }</code></pre>
             </div>
           </div>
@@ -1878,6 +1894,11 @@ Content-Length: 54
               <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
               <td class="tableblock halign-left valign-top"><p class="tableblock">생성된 리뷰의 0.5점 단위의 별점</p></td>
             </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>createdAt</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">생성된 리뷰의 생성 날짜 및 시간</p></td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -1887,7 +1908,7 @@ Content-Length: 54
 </div>
 <div id="footer">
 <div id="footer-text">
-  Last updated 2021-12-04 13:39:31 +0900
+  Last updated 2021-12-04 14:35:27 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
