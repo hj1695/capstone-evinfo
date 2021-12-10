@@ -5,6 +5,7 @@ import com.evinfo.domain.charger.ChargerStat;
 import com.evinfo.domain.charger.Station;
 import lombok.Getter;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ public class StationResponseDto {
         this.reviews = station.getReviews() // TODO: 2021/12/07 여기서 정렬 필요할지 고민해보기
                 .stream()
                 .map(ReviewResponseDto::new)
+                .sorted(Comparator.comparing(ReviewResponseDto::getCreatedAt).reversed())
                 .collect(Collectors.toList());
         if (this.reviews.isEmpty()) {
             this.reviewAverage = 0.0;

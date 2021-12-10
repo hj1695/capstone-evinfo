@@ -9,6 +9,7 @@ import com.evinfo.domain.review.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,7 @@ public class ReviewService {
 
         return reviews.stream()
                 .map(ReviewResponseDto::new)
+                .sorted(Comparator.comparing(ReviewResponseDto::getCreatedAt).reversed())
                 .collect(Collectors.toList());
     }
 
